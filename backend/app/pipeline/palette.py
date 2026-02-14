@@ -1,5 +1,3 @@
-# Minecraft block color palette and nearest-block matching.
-
 import numpy as np
 
 # (R, G, B, block_id)
@@ -59,29 +57,60 @@ BLOCK_PALETTE: list[tuple[int, int, int, str]] = [
     (37, 23, 16, "minecraft:black_terracotta"),
 ]
 
-
-# Pre-compute numpy array for vectorized distance matching.
+# Pre-compute numpy array of all 48 palette colors.
 _PALETTE_RGB = np.array(
     [(r, g, b) for r, g, b, _ in BLOCK_PALETTE], dtype=np.float32
 )
 _PALETTE_NAMES = [name for _, _, _, name in BLOCK_PALETTE]
 
 
-# Find the closest palette block to an RGB color (Euclidean distance)
-def nearest_block(r: int, g: int, b: int) -> str:
-    color = np.array([r, g, b], dtype=np.float32)
-    distances = np.sum((_PALETTE_RGB - color) ** 2, axis=1)
-    return _PALETTE_NAMES[int(np.argmin(distances))]
+# Pick the best subset of palette blocks for this specific image.
+# Assigns every pixel to its nearest full-palette block, counts usage,
+#   then keeps the top **max-colors** most-used blocks.
+def select_palette(pixels: np.ndarray, max_colors: int = 24) -> tuple[np.ndarray, list[str]]:
 
-
-
-# Map an array of shape (N, 3) RGB pixels to block names.
-# Vectorized for speed on large images.
-def map_image_to_blocks(pixels: np.ndarray) -> list[str]:
-
-    # pixels: (N, 3), palette: (P, 3)
-    # Compute distances: (N, P)
+    # Full-palette match for every pixel
     diff = pixels[:, np.newaxis, :].astype(np.float32) - _PALETTE_RGB[np.newaxis, :, :]
     distances = np.sum(diff ** 2, axis=2)
+    nearest = np.argmin(distances, axis=1)
+
+    # Count how often each palette entry is used
+    counts = np.bincount(nearest, minlength=len(_PALETTE_NAMES))
+
+    # Take the top max_colors
+    top_indices = np.argsort(counts)[::-1][:max_colors]
+    top_indices = np.sort(top_indices)  # Keep original palette order
+
+    sub_rgb = _PALETTE_RGB[top_indices]
+    sub_names = [_PALETTE_NAMES[i] for i in top_indices]
+    return sub_rgb, sub_names
+
+
+# Map (N, 3) RGB pixels to block names. If palette is provided, uses that palette.
+def map_image_to_blocks(
+    pixels: np.ndarray,
+    palette_rgb: np.ndarray | None = None,
+    palette_names: list[str] | None = None,
+) -> list[str]:
+
+    if palette_rgb is None:
+        palette_rgb = _PALETTE_RGB
+        palette_names = _PALETTE_NAMES
+
+    diff = pixels[:, np.newaxis, :].astype(np.float32) - palette_rgb[np.newaxis, :, :]
+    distances = np.sum(diff ** 2, axis=2)
     indices = np.argmin(distances, axis=1)
-    return [_PALETTE_NAMES[i] for i in indices]
+    return [palette_names[i] for i in indices]
+
+
+# Find nearest block to RBG color using Euclidean distances
+def nearest_block_from_palette(
+    r: int, g: int, b: int,
+    palette_rgb: np.ndarray,
+    palette_names: list[str],
+) -> tuple[str, np.ndarray]:
+
+    color = np.array([r, g, b], dtype=np.float32)
+    distances = np.sum((palette_rgb - color) ** 2, axis=1)
+    idx = int(np.argmin(distances))
+    return palette_names[idx], palette_rgb[idx]
