@@ -1,0 +1,30 @@
+CLAUDE.md
+.claude
+PLAN.md
+
+# Python
+__pycache__/
+*.pyc
+*.egg-info/
+.venv/
+.env*
+
+# Storage
+backend/storage/
+
+# Java
+minecraft-plugin/build/
+minecraft-plugin/.gradle/
+*.jar
+*.class
+
+# Mobile
+mobile/node_modules/
+mobile/.expo/
+mobile/dist/
+
+# IDE
+.idea/
+*.iml
+.vscode/
+.DS_Store
