@@ -103,14 +103,14 @@ def map_image_to_blocks(
     return [palette_names[i] for i in indices]
 
 
-# Find nearest block to RBG color using Euclidean distances
+# Find nearest block to an RGB color using Euclidean distance.
 def nearest_block_from_palette(
-    r: int, g: int, b: int,
+    color: np.ndarray,
     palette_rgb: np.ndarray,
     palette_names: list[str],
 ) -> tuple[str, np.ndarray]:
 
-    color = np.array([r, g, b], dtype=np.float32)
+    color = np.asarray(color, dtype=np.float32)
     distances = np.sum((palette_rgb - color) ** 2, axis=1)
     idx = int(np.argmin(distances))
     return palette_names[idx], palette_rgb[idx]
