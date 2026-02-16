@@ -1,0 +1,1 @@
+from app.tasks.pipeline_tasks import run_pipeline
