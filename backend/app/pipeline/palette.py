@@ -87,11 +87,7 @@ def select_palette(pixels: np.ndarray, max_colors: int = 24) -> tuple[np.ndarray
 
 
 # Map (N, 3) RGB pixels to block names. If palette is provided, uses that palette.
-def map_image_to_blocks(
-    pixels: np.ndarray,
-    palette_rgb: np.ndarray | None = None,
-    palette_names: list[str] | None = None,
-) -> list[str]:
+def map_image_to_blocks(pixels: np.ndarray, palette_rgb: np.ndarray | None = None, palette_names: list[str] | None = None) -> list[str]:
 
     if palette_rgb is None:
         palette_rgb = _PALETTE_RGB

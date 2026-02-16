@@ -20,6 +20,7 @@ from app.models import (
     BuildPlanMetadata,
     StageName,
 )
+
 from app.pipeline.palette import nearest_block_from_palette, select_palette
 
 logger = logging.getLogger(__name__)
@@ -28,12 +29,7 @@ logger = logging.getLogger(__name__)
 # Apply Floyd-Steinberg dithering on the image. 
 # RGB: (H, W, 3) float32 ; alpha: (H, W) uint8
 # Returns (H, W) int array of palette indices (-1 = transparent)
-def _floyd_steinberg_dither(
-    rgb: np.ndarray,
-    alpha: np.ndarray,
-    palette_rgb: np.ndarray,
-    palette_names: list[str],
-) -> np.ndarray:
+def _floyd_steinberg_dither(rgb: np.ndarray, alpha: np.ndarray, palette_rgb: np.ndarray, palette_names: list[str]) -> np.ndarray:
     h, w = rgb.shape[:2]
 
     img = rgb.astype(np.float64).copy()
@@ -68,11 +64,7 @@ def _floyd_steinberg_dither(
 
 
 # Generate 2D preview
-def generate_preview(
-    cutout_path: str,
-    job_id: str,
-    grid_size: int = 64,
-) -> BuildPlan:
+def generate_preview(cutout_path: str, job_id: str, grid_size: int = 64) -> BuildPlan:
     start = time.perf_counter()
 
     img = Image.open(cutout_path).convert("RGBA")
@@ -113,12 +105,14 @@ def generate_preview(
                 continue
 
             block_name = palette_names[idx]
+
             blocks.append(BuildPlanBlock(
                 x=col,
                 y=grid_size - 1 - row,
                 z=0,
                 block=block_name,
             ))
+            
             palette_set.add(block_name)
 
     elapsed_ms = int((time.perf_counter() - start) * 1000)

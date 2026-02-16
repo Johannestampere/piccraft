@@ -38,8 +38,6 @@ class JobStatus(str, Enum):
 #####################
 
 
-
-
 class StageInfo(BaseModel):
     status: StageStatus = StageStatus.pending
     started_at: datetime | None = None
