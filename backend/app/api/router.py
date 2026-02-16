@@ -1,6 +1,7 @@
 import json
 import uuid
 import logging
+from datetime import datetime, timezone
 
 import redis
 from fastapi import APIRouter, UploadFile, File, HTTPException
@@ -52,7 +53,7 @@ def save_job_state(job_state: JobState) -> None:
     _redis.set(
         _job_key(job_state.job_id),
         job_state.model_dump_json(),
-        ex=3600 * 24,
+        ex=3600 * 24,                    # Expires in 24h
     )
 
 
@@ -62,7 +63,7 @@ def _add_ready(job_id: str, stage: StageName) -> None:
     entry = ReadyStage(
         job_id=job_id,
         stage=stage,
-        completed_at=__import__("datetime").datetime.now(__import__("datetime").timezone.utc),
+        completed_at=datetime.now(timezone.utc),
     )
     
     _redis.rpush("piccraft:ready", entry.model_dump_json())
