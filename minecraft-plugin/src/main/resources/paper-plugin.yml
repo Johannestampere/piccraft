@@ -1,0 +1,7 @@
+name: PicCraft
+version: "${version}"
+main: com.piccraft.plugin.PicCraftPlugin
+description: Places PicCraft build plans in the Minecraft world
+api-version: "1.21"
+authors:
+  - PicCraft
