@@ -23,6 +23,7 @@ public class BackendClient {
         this.logger = logger;
         this.gson = new Gson();
         this.httpClient = HttpClient.newBuilder()
+            .version(HttpClient.Version.HTTP_1_1)
             .connectTimeout(Duration.ofSeconds(5))
             .build();
     }
@@ -33,7 +34,7 @@ public class BackendClient {
      */
     public CompletableFuture<BuildPlan.ReadyResponse> pollReady() {
         HttpRequest request = HttpRequest.newBuilder()
-            .uri(URI.create(baseUrl + "/api/v1/jobs/ready"))
+            .uri(URI.create(baseUrl + "/api/v0/jobs/ready"))
             .timeout(Duration.ofSeconds(10))
             .GET()
             .build();
