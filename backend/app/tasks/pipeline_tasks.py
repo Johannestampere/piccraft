@@ -24,6 +24,8 @@ from app.models import (
 from app.storage.local import get_upload_path, save_build_plan
 from app.pipeline.segment import segment_subject, save_segmentation
 from app.pipeline.stage0_preview import generate_preview
+from app.pipeline.depth import estimate_depth
+from app.pipeline.voxelizer import voxelize
 
 logger = logging.getLogger(__name__)
 
@@ -136,9 +138,30 @@ def run_pipeline(job_id: str) -> None:
         _mark_job_failed(job_id, StageName.preview)
         return
 
-    # ── Stage 1 & 2: TODO ────────────────────────────────────
+    # Stage 1: Rough 3D (depth estimation + voxelization)
+    try:
+        _mark_stage_started(job_id, StageName.rough)
+        t0 = time.perf_counter()
 
-    # Mark job completed (for now, only preview stage exists)
+        depth_map = estimate_depth(cutout_path)
+        plan = voxelize(
+            cutout_path=cutout_path,
+            depth_map=depth_map,
+            job_id=job_id,
+            voxel_size=settings.stage1_voxel_size,
+        )
+        save_build_plan(job_id, stage=1, plan=plan)
+
+        rough_ms = int((time.perf_counter() - t0) * 1000)
+        _mark_stage_completed(job_id, StageName.rough, rough_ms)
+        logger.info(f"[{job_id}] Stage 1 done in {rough_ms}ms")
+    except Exception:
+        logger.exception(f"[{job_id}] Stage 1 failed")
+        _mark_job_failed(job_id, StageName.rough)
+
+    # Stage 2: TODO
+
+    # Mark job completed
     state = _load_state(job_id)
     state.status = JobStatus.completed
     state.current_stage = None
