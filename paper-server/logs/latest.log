@@ -1,0 +1,126 @@
+[19:59:16] [ServerMain/INFO]: [bootstrap] Running Java 21 (OpenJDK 64-Bit Server VM 21.0.10; Homebrew Homebrew) on Mac OS X 15.6.1 (x86_64)
+[19:59:16] [ServerMain/INFO]: [bootstrap] Loading Paper 1.21.4-194-main@ce30016 (2025-03-08T04:40:16Z) for Minecraft 1.21.4
+[19:59:18] [ServerMain/INFO]: [PluginInitializerManager] Initializing plugins...
+[19:59:18] [ServerMain/INFO]: [PluginInitializerManager] Initialized 1 plugin
+[19:59:18] [ServerMain/INFO]: [PluginInitializerManager] Paper plugins (1):
+ - PicCraft (0.1.0)
+[19:59:24] [ServerMain/INFO]: Environment: Environment[sessionHost=https://sessionserver.mojang.com, servicesHost=https://api.minecraftservices.com, name=PROD]
+[19:59:26] [ServerMain/INFO]: Loaded 1370 recipes
+[19:59:26] [ServerMain/INFO]: Loaded 1481 advancements
+[19:59:26] [ServerMain/INFO]: [MCTypeRegistry] Initialising converters for DataConverter...
+[19:59:26] [ServerMain/INFO]: [MCTypeRegistry] Finished initialising converters for DataConverter in 273.4ms
+[19:59:26] [Server thread/INFO]: Starting minecraft server version 1.21.4
+[19:59:26] [Server thread/INFO]: Loading properties
+[19:59:26] [Server thread/INFO]: This server is running Paper version 1.21.4-194-main@ce30016 (2025-03-08T04:40:16Z) (Implementing API version 1.21.4-R0.1-SNAPSHOT)
+[19:59:27] [Server thread/INFO]: [spark] This server bundles the spark profiler. For more information please visit https://docs.papermc.io/paper/profiling
+[19:59:27] [Server thread/INFO]: Server Ping Player Sample Count: 12
+[19:59:27] [Server thread/INFO]: Using 4 threads for Netty based IO
+[19:59:27] [Server thread/INFO]: [MoonriseCommon] Paper is using 3 worker threads, 1 I/O threads
+[19:59:27] [Server thread/INFO]: [ChunkTaskScheduler] Chunk system is using population gen parallelism: true
+[19:59:28] [Server thread/INFO]: Default game type: SURVIVAL
+[19:59:28] [Server thread/INFO]: Generating keypair
+[19:59:28] [Server thread/INFO]: Starting Minecraft server on *:25565
+[19:59:28] [Server thread/INFO]: Using default channel type
+[19:59:28] [Server thread/INFO]: Paper: Using Java compression from Velocity.
+[19:59:28] [Server thread/INFO]: Paper: Using Java cipher from Velocity.
+[19:59:28] [Server thread/INFO]: [PicCraft] Loading server plugin PicCraft v0.1.0
+[19:59:28] [Server thread/INFO]: Server permissions file permissions.yml is empty, ignoring it
+[19:59:28] [Server thread/INFO]: Preparing level "world"
+[19:59:29] [Server thread/INFO]: Preparing start region for dimension minecraft:overworld
+[19:59:29] [Server thread/INFO]: Preparing spawn area: 0%
+[19:59:30] [Server thread/INFO]: Preparing spawn area: 8%
+[19:59:30] [Server thread/INFO]: Preparing spawn area: 8%
+[19:59:30] [Server thread/INFO]: Time elapsed: 1195 ms
+[19:59:30] [Server thread/INFO]: Preparing start region for dimension minecraft:the_nether
+[19:59:30] [Server thread/INFO]: Preparing spawn area: 0%
+[19:59:30] [Server thread/INFO]: Time elapsed: 296 ms
+[19:59:30] [Server thread/INFO]: Preparing start region for dimension minecraft:the_end
+[19:59:30] [Server thread/INFO]: Preparing spawn area: 0%
+[19:59:30] [Server thread/INFO]: Time elapsed: 183 ms
+[19:59:30] [Server thread/INFO]: [PicCraft] Enabling PicCraft v0.1.0
+[19:59:30] [Server thread/INFO]: [PicCraft] Backend URL: http://localhost:8000
+[19:59:30] [Server thread/INFO]: [PicCraft] Poll interval: 3s
+[19:59:30] [Server thread/INFO]: [PicCraft] Blocks/tick: 200
+[19:59:30] [Server thread/INFO]: [PicCraft] Starting job poller (interval: 3s)
+[19:59:30] [Server thread/INFO]: [PicCraft] PicCraft enabled. Polling for builds...
+[19:59:31] [Server thread/INFO]: [spark] Starting background profiler...
+[19:59:31] [Server thread/INFO]: [spark] The async-profiler engine is not supported for your os/arch (macosx/x86_64), so the built-in Java engine will be used instead.
+[19:59:31] [Server thread/INFO]: Done preparing level "world" (2.550s)
+[19:59:31] [Server thread/INFO]: Running delayed init tasks
+[19:59:31] [Server thread/INFO]: Done (16.278s)! For help, type "help"
+[20:02:55] [User Authenticator #0/INFO]: UUID of player B2kkar is afadcbca-3912-4319-b85b-76e675019a00
+[20:02:56] [Server thread/INFO]: B2kkar joined the game
+[20:02:56] [Server thread/INFO]: B2kkar[/127.0.0.1:59748] logged in with entity id 33 at ([world]-3.5, 97.0, -5.5)
+[20:03:34] [Server thread/INFO]: B2kkar was slain by Zombie
+[20:03:50] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] Poll found 1 ready stage(s)
+[20:03:50] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] [f2b9438fbc32] Downloaded preview: 2993 blocks
+[20:03:50] [Server thread/INFO]: [PicCraft] [f2b9438fbc32] Executing stage: preview (2993 blocks)
+[20:03:50] [Server thread/INFO]: [PicCraft] [f2b9438fbc32] Origin: -7, 97, 20 facing WEST
+[20:03:50] [Server thread/INFO]: [PicCraft] [f2b9438fbc32] Stage preview placed: 2993 blocks in 635ms
+[20:04:38] [Server thread/INFO]: B2kkar was slain by Zombie
+[20:05:03] [Server thread/INFO]: B2kkar issued server command: /gamemode creative
+[20:06:27] [Server thread/INFO]: B2kkar was slain by Zombie
+[20:10:29] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] Poll found 1 ready stage(s)
+[20:10:29] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] [73e854aa02b7] Downloaded preview: 1378 blocks
+[20:10:29] [Server thread/INFO]: [PicCraft] [73e854aa02b7] Executing stage: preview (1378 blocks)
+[20:10:29] [Server thread/INFO]: [PicCraft] [73e854aa02b7] Origin: 29, 107, -34 facing EAST
+[20:10:29] [Server thread/INFO]: [PicCraft] [73e854aa02b7] Stage preview placed: 1378 blocks in 301ms
+[20:15:08] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] Poll found 1 ready stage(s)
+[20:15:08] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] [c8aebf1c5f17] Downloaded preview: 1862 blocks
+[20:15:08] [Server thread/INFO]: [PicCraft] [c8aebf1c5f17] Executing stage: preview (1862 blocks)
+[20:15:08] [Server thread/INFO]: [PicCraft] [c8aebf1c5f17] Origin: 7, 113, -14 facing EAST
+[20:15:08] [Server thread/INFO]: [PicCraft] [c8aebf1c5f17] Stage preview placed: 1862 blocks in 452ms
+[20:17:14] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] Poll found 1 ready stage(s)
+[20:17:14] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] [bc346eac7f23] Downloaded preview: 3102 blocks
+[20:17:14] [Server thread/INFO]: [PicCraft] [bc346eac7f23] Executing stage: preview (3102 blocks)
+[20:17:14] [Server thread/INFO]: [PicCraft] [bc346eac7f23] Origin: 22, 111, 42 facing SOUTH
+[20:17:15] [Server thread/INFO]: [PicCraft] [bc346eac7f23] Stage preview placed: 3102 blocks in 763ms
+[20:18:26] [Server thread/INFO]: B2kkar issued server command: /gamemode creative b2kka
+[20:19:34] [Async Chat Thread - #2/INFO]: <B2kkar> gamemode creative b2kkar
+[20:19:46] [Server thread/INFO]: B2kkar issued server command: /gamemode creative B2kkar
+[20:21:44] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] Poll found 1 ready stage(s)
+[20:21:44] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] [2b7a72db31cc] Downloaded preview: 1542 blocks
+[20:21:44] [Server thread/INFO]: [PicCraft] [2b7a72db31cc] Executing stage: preview (1542 blocks)
+[20:21:44] [Server thread/INFO]: [PicCraft] [2b7a72db31cc] Origin: -37, 98, 13 facing WEST
+[20:21:44] [Server thread/INFO]: [PicCraft] [2b7a72db31cc] Stage preview placed: 1542 blocks in 351ms
+[20:25:59] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] Poll found 1 ready stage(s)
+[20:25:59] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] [7bf189a1b6f1] Downloaded preview: 1290 blocks
+[20:25:59] [Server thread/INFO]: [PicCraft] [7bf189a1b6f1] Executing stage: preview (1290 blocks)
+[20:25:59] [Server thread/INFO]: [PicCraft] [7bf189a1b6f1] Origin: -49, 105, -58 facing NORTH
+[20:25:59] [Server thread/INFO]: [PicCraft] [7bf189a1b6f1] Stage preview placed: 1290 blocks in 299ms
+[20:27:06] [Server thread/INFO]: B2kkar lost connection: Disconnected
+[20:27:06] [Server thread/INFO]: B2kkar left the game
+[20:27:58] [Server thread/INFO]: Stopping server
+[20:27:58] [Server thread/INFO]: [PicCraft] Disabling PicCraft v0.1.0
+[20:27:58] [Server thread/INFO]: [PicCraft] PicCraft disabled.
+[20:27:59] [Server thread/INFO]: Saving players
+[20:27:59] [Server thread/INFO]: Saving worlds
+[20:27:59] [Server thread/INFO]: Saving chunks for level 'ServerLevel[world]'/minecraft:overworld
+[20:27:59] [Server thread/INFO]: [ChunkHolderManager] Waiting 60s for chunk system to halt for world 'world'
+[20:27:59] [Server thread/INFO]: [ChunkHolderManager] Halted chunk system for world 'world'
+[20:27:59] [Server thread/INFO]: [ChunkHolderManager] Saving all chunkholders for world 'world'
+[20:27:59] [Server thread/INFO]: [ChunkHolderManager] Saved 149 block chunks, 223 entity chunks, 0 poi chunks in world 'world' in 0.35s
+[20:27:59] [Server thread/INFO]: [ChunkHolderManager] Waiting 60s for chunk I/O to halt for world 'world'
+[20:27:59] [Server thread/INFO]: [ChunkHolderManager] Halted I/O scheduler for world 'world'
+[20:27:59] [Server thread/INFO]: Saving chunks for level 'ServerLevel[world_nether]'/minecraft:the_nether
+[20:27:59] [Server thread/INFO]: [ChunkHolderManager] Waiting 60s for chunk system to halt for world 'world_nether'
+[20:27:59] [Server thread/INFO]: [ChunkHolderManager] Halted chunk system for world 'world_nether'
+[20:27:59] [Server thread/INFO]: [ChunkHolderManager] Saving all chunkholders for world 'world_nether'
+[20:27:59] [Server thread/INFO]: [ChunkHolderManager] Saved 0 block chunks, 1 entity chunks, 0 poi chunks in world 'world_nether' in 0.12s
+[20:27:59] [Server thread/INFO]: [ChunkHolderManager] Waiting 60s for chunk I/O to halt for world 'world_nether'
+[20:27:59] [Server thread/INFO]: [ChunkHolderManager] Halted I/O scheduler for world 'world_nether'
+[20:28:00] [Server thread/INFO]: Saving chunks for level 'ServerLevel[world_the_end]'/minecraft:the_end
+[20:28:00] [Server thread/INFO]: [ChunkHolderManager] Waiting 60s for chunk system to halt for world 'world_the_end'
+[20:28:00] [Server thread/INFO]: [ChunkHolderManager] Halted chunk system for world 'world_the_end'
+[20:28:00] [Server thread/INFO]: [ChunkHolderManager] Saving all chunkholders for world 'world_the_end'
+[20:28:00] [Server thread/INFO]: [ChunkHolderManager] Saved 0 block chunks, 10 entity chunks, 0 poi chunks in world 'world_the_end' in 0.20s
+[20:28:00] [Server thread/INFO]: [ChunkHolderManager] Waiting 60s for chunk I/O to halt for world 'world_the_end'
+[20:28:00] [Server thread/INFO]: [ChunkHolderManager] Halted I/O scheduler for world 'world_the_end'
+[20:28:00] [Server thread/INFO]: ThreadedAnvilChunkStorage (world): All chunks are saved
+[20:28:00] [Server thread/INFO]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[20:28:00] [Server thread/INFO]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[20:28:00] [Server thread/INFO]: ThreadedAnvilChunkStorage: All dimensions are saved
+[20:28:00] [Server thread/INFO]: Waiting for I/O tasks to complete...
+[20:28:00] [Server thread/INFO]: All I/O tasks to complete
+[20:28:00] [Server thread/INFO]: [MoonriseCommon] Awaiting termination of worker pool for up to 60s...
+[20:28:00] [Server thread/INFO]: [MoonriseCommon] Awaiting termination of I/O pool for up to 60s...

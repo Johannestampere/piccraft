@@ -1,0 +1,11 @@
+# PicCraft Backend
+backend-url: "http://localhost:8000"
+
+# How often to poll /api/v0/jobs/ready (in seconds)
+poll-interval-seconds: 3
+
+# How many blocks to place per server tick
+blocks-per-tick: 200
+
+# How many blocks in front of the player to place builds
+forward-offset: 10
