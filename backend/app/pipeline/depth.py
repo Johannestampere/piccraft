@@ -58,11 +58,14 @@ def estimate_depth(cutout_path: str) -> np.ndarray:
         outputs = model(**inputs)
 
     # Interpolate to original image size
-    post = processor.post_process_depth_estimation(
-        outputs,
-        target_sizes=[(rgb.size[1], rgb.size[0])],  # (H, W)
-    )
-    depth = post[0]["predicted_depth"].numpy()
+    predicted_depth = outputs.predicted_depth
+    
+    depth = torch.nn.functional.interpolate(
+        predicted_depth.unsqueeze(1),
+        size=(rgb.size[1], rgb.size[0]),  # (H, W)
+        mode="bicubic",
+        align_corners=False,
+    ).squeeze().numpy()
 
     # Normalize to 0-1 (only opaque pixels)
     opaque = alpha > 128
@@ -77,9 +80,6 @@ def estimate_depth(cutout_path: str) -> np.ndarray:
             depth = np.zeros_like(depth)
     else:
         depth = np.zeros_like(depth)
-
-    # Invert: model outputs higher = farther, we want higher = closer
-    depth = 1.0 - depth
 
     # Zero out transparent pixels
     depth[~opaque] = 0.0

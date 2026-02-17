@@ -1,126 +1,247 @@
-[19:59:16] [ServerMain/INFO]: [bootstrap] Running Java 21 (OpenJDK 64-Bit Server VM 21.0.10; Homebrew Homebrew) on Mac OS X 15.6.1 (x86_64)
-[19:59:16] [ServerMain/INFO]: [bootstrap] Loading Paper 1.21.4-194-main@ce30016 (2025-03-08T04:40:16Z) for Minecraft 1.21.4
-[19:59:18] [ServerMain/INFO]: [PluginInitializerManager] Initializing plugins...
-[19:59:18] [ServerMain/INFO]: [PluginInitializerManager] Initialized 1 plugin
-[19:59:18] [ServerMain/INFO]: [PluginInitializerManager] Paper plugins (1):
+[16:34:25] [ServerMain/INFO]: [bootstrap] Running Java 21 (OpenJDK 64-Bit Server VM 21.0.10; Homebrew Homebrew) on Mac OS X 15.6.1 (x86_64)
+[16:34:25] [ServerMain/INFO]: [bootstrap] Loading Paper 1.21.4-194-main@ce30016 (2025-03-08T04:40:16Z) for Minecraft 1.21.4
+[16:34:27] [ServerMain/INFO]: [PluginInitializerManager] Initializing plugins...
+[16:34:27] [ServerMain/INFO]: [PluginInitializerManager] Initialized 1 plugin
+[16:34:27] [ServerMain/INFO]: [PluginInitializerManager] Paper plugins (1):
  - PicCraft (0.1.0)
-[19:59:24] [ServerMain/INFO]: Environment: Environment[sessionHost=https://sessionserver.mojang.com, servicesHost=https://api.minecraftservices.com, name=PROD]
-[19:59:26] [ServerMain/INFO]: Loaded 1370 recipes
-[19:59:26] [ServerMain/INFO]: Loaded 1481 advancements
-[19:59:26] [ServerMain/INFO]: [MCTypeRegistry] Initialising converters for DataConverter...
-[19:59:26] [ServerMain/INFO]: [MCTypeRegistry] Finished initialising converters for DataConverter in 273.4ms
-[19:59:26] [Server thread/INFO]: Starting minecraft server version 1.21.4
-[19:59:26] [Server thread/INFO]: Loading properties
-[19:59:26] [Server thread/INFO]: This server is running Paper version 1.21.4-194-main@ce30016 (2025-03-08T04:40:16Z) (Implementing API version 1.21.4-R0.1-SNAPSHOT)
-[19:59:27] [Server thread/INFO]: [spark] This server bundles the spark profiler. For more information please visit https://docs.papermc.io/paper/profiling
-[19:59:27] [Server thread/INFO]: Server Ping Player Sample Count: 12
-[19:59:27] [Server thread/INFO]: Using 4 threads for Netty based IO
-[19:59:27] [Server thread/INFO]: [MoonriseCommon] Paper is using 3 worker threads, 1 I/O threads
-[19:59:27] [Server thread/INFO]: [ChunkTaskScheduler] Chunk system is using population gen parallelism: true
-[19:59:28] [Server thread/INFO]: Default game type: SURVIVAL
-[19:59:28] [Server thread/INFO]: Generating keypair
-[19:59:28] [Server thread/INFO]: Starting Minecraft server on *:25565
-[19:59:28] [Server thread/INFO]: Using default channel type
-[19:59:28] [Server thread/INFO]: Paper: Using Java compression from Velocity.
-[19:59:28] [Server thread/INFO]: Paper: Using Java cipher from Velocity.
-[19:59:28] [Server thread/INFO]: [PicCraft] Loading server plugin PicCraft v0.1.0
-[19:59:28] [Server thread/INFO]: Server permissions file permissions.yml is empty, ignoring it
-[19:59:28] [Server thread/INFO]: Preparing level "world"
-[19:59:29] [Server thread/INFO]: Preparing start region for dimension minecraft:overworld
-[19:59:29] [Server thread/INFO]: Preparing spawn area: 0%
-[19:59:30] [Server thread/INFO]: Preparing spawn area: 8%
-[19:59:30] [Server thread/INFO]: Preparing spawn area: 8%
-[19:59:30] [Server thread/INFO]: Time elapsed: 1195 ms
-[19:59:30] [Server thread/INFO]: Preparing start region for dimension minecraft:the_nether
-[19:59:30] [Server thread/INFO]: Preparing spawn area: 0%
-[19:59:30] [Server thread/INFO]: Time elapsed: 296 ms
-[19:59:30] [Server thread/INFO]: Preparing start region for dimension minecraft:the_end
-[19:59:30] [Server thread/INFO]: Preparing spawn area: 0%
-[19:59:30] [Server thread/INFO]: Time elapsed: 183 ms
-[19:59:30] [Server thread/INFO]: [PicCraft] Enabling PicCraft v0.1.0
-[19:59:30] [Server thread/INFO]: [PicCraft] Backend URL: http://localhost:8000
-[19:59:30] [Server thread/INFO]: [PicCraft] Poll interval: 3s
-[19:59:30] [Server thread/INFO]: [PicCraft] Blocks/tick: 200
-[19:59:30] [Server thread/INFO]: [PicCraft] Starting job poller (interval: 3s)
-[19:59:30] [Server thread/INFO]: [PicCraft] PicCraft enabled. Polling for builds...
-[19:59:31] [Server thread/INFO]: [spark] Starting background profiler...
-[19:59:31] [Server thread/INFO]: [spark] The async-profiler engine is not supported for your os/arch (macosx/x86_64), so the built-in Java engine will be used instead.
-[19:59:31] [Server thread/INFO]: Done preparing level "world" (2.550s)
-[19:59:31] [Server thread/INFO]: Running delayed init tasks
-[19:59:31] [Server thread/INFO]: Done (16.278s)! For help, type "help"
-[20:02:55] [User Authenticator #0/INFO]: UUID of player B2kkar is afadcbca-3912-4319-b85b-76e675019a00
-[20:02:56] [Server thread/INFO]: B2kkar joined the game
-[20:02:56] [Server thread/INFO]: B2kkar[/127.0.0.1:59748] logged in with entity id 33 at ([world]-3.5, 97.0, -5.5)
-[20:03:34] [Server thread/INFO]: B2kkar was slain by Zombie
-[20:03:50] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] Poll found 1 ready stage(s)
-[20:03:50] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] [f2b9438fbc32] Downloaded preview: 2993 blocks
-[20:03:50] [Server thread/INFO]: [PicCraft] [f2b9438fbc32] Executing stage: preview (2993 blocks)
-[20:03:50] [Server thread/INFO]: [PicCraft] [f2b9438fbc32] Origin: -7, 97, 20 facing WEST
-[20:03:50] [Server thread/INFO]: [PicCraft] [f2b9438fbc32] Stage preview placed: 2993 blocks in 635ms
-[20:04:38] [Server thread/INFO]: B2kkar was slain by Zombie
-[20:05:03] [Server thread/INFO]: B2kkar issued server command: /gamemode creative
-[20:06:27] [Server thread/INFO]: B2kkar was slain by Zombie
-[20:10:29] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] Poll found 1 ready stage(s)
-[20:10:29] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] [73e854aa02b7] Downloaded preview: 1378 blocks
-[20:10:29] [Server thread/INFO]: [PicCraft] [73e854aa02b7] Executing stage: preview (1378 blocks)
-[20:10:29] [Server thread/INFO]: [PicCraft] [73e854aa02b7] Origin: 29, 107, -34 facing EAST
-[20:10:29] [Server thread/INFO]: [PicCraft] [73e854aa02b7] Stage preview placed: 1378 blocks in 301ms
-[20:15:08] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] Poll found 1 ready stage(s)
-[20:15:08] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] [c8aebf1c5f17] Downloaded preview: 1862 blocks
-[20:15:08] [Server thread/INFO]: [PicCraft] [c8aebf1c5f17] Executing stage: preview (1862 blocks)
-[20:15:08] [Server thread/INFO]: [PicCraft] [c8aebf1c5f17] Origin: 7, 113, -14 facing EAST
-[20:15:08] [Server thread/INFO]: [PicCraft] [c8aebf1c5f17] Stage preview placed: 1862 blocks in 452ms
-[20:17:14] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] Poll found 1 ready stage(s)
-[20:17:14] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] [bc346eac7f23] Downloaded preview: 3102 blocks
-[20:17:14] [Server thread/INFO]: [PicCraft] [bc346eac7f23] Executing stage: preview (3102 blocks)
-[20:17:14] [Server thread/INFO]: [PicCraft] [bc346eac7f23] Origin: 22, 111, 42 facing SOUTH
-[20:17:15] [Server thread/INFO]: [PicCraft] [bc346eac7f23] Stage preview placed: 3102 blocks in 763ms
-[20:18:26] [Server thread/INFO]: B2kkar issued server command: /gamemode creative b2kka
-[20:19:34] [Async Chat Thread - #2/INFO]: <B2kkar> gamemode creative b2kkar
-[20:19:46] [Server thread/INFO]: B2kkar issued server command: /gamemode creative B2kkar
-[20:21:44] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] Poll found 1 ready stage(s)
-[20:21:44] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] [2b7a72db31cc] Downloaded preview: 1542 blocks
-[20:21:44] [Server thread/INFO]: [PicCraft] [2b7a72db31cc] Executing stage: preview (1542 blocks)
-[20:21:44] [Server thread/INFO]: [PicCraft] [2b7a72db31cc] Origin: -37, 98, 13 facing WEST
-[20:21:44] [Server thread/INFO]: [PicCraft] [2b7a72db31cc] Stage preview placed: 1542 blocks in 351ms
-[20:25:59] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] Poll found 1 ready stage(s)
-[20:25:59] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] [7bf189a1b6f1] Downloaded preview: 1290 blocks
-[20:25:59] [Server thread/INFO]: [PicCraft] [7bf189a1b6f1] Executing stage: preview (1290 blocks)
-[20:25:59] [Server thread/INFO]: [PicCraft] [7bf189a1b6f1] Origin: -49, 105, -58 facing NORTH
-[20:25:59] [Server thread/INFO]: [PicCraft] [7bf189a1b6f1] Stage preview placed: 1290 blocks in 299ms
-[20:27:06] [Server thread/INFO]: B2kkar lost connection: Disconnected
-[20:27:06] [Server thread/INFO]: B2kkar left the game
-[20:27:58] [Server thread/INFO]: Stopping server
-[20:27:58] [Server thread/INFO]: [PicCraft] Disabling PicCraft v0.1.0
-[20:27:58] [Server thread/INFO]: [PicCraft] PicCraft disabled.
-[20:27:59] [Server thread/INFO]: Saving players
-[20:27:59] [Server thread/INFO]: Saving worlds
-[20:27:59] [Server thread/INFO]: Saving chunks for level 'ServerLevel[world]'/minecraft:overworld
-[20:27:59] [Server thread/INFO]: [ChunkHolderManager] Waiting 60s for chunk system to halt for world 'world'
-[20:27:59] [Server thread/INFO]: [ChunkHolderManager] Halted chunk system for world 'world'
-[20:27:59] [Server thread/INFO]: [ChunkHolderManager] Saving all chunkholders for world 'world'
-[20:27:59] [Server thread/INFO]: [ChunkHolderManager] Saved 149 block chunks, 223 entity chunks, 0 poi chunks in world 'world' in 0.35s
-[20:27:59] [Server thread/INFO]: [ChunkHolderManager] Waiting 60s for chunk I/O to halt for world 'world'
-[20:27:59] [Server thread/INFO]: [ChunkHolderManager] Halted I/O scheduler for world 'world'
-[20:27:59] [Server thread/INFO]: Saving chunks for level 'ServerLevel[world_nether]'/minecraft:the_nether
-[20:27:59] [Server thread/INFO]: [ChunkHolderManager] Waiting 60s for chunk system to halt for world 'world_nether'
-[20:27:59] [Server thread/INFO]: [ChunkHolderManager] Halted chunk system for world 'world_nether'
-[20:27:59] [Server thread/INFO]: [ChunkHolderManager] Saving all chunkholders for world 'world_nether'
-[20:27:59] [Server thread/INFO]: [ChunkHolderManager] Saved 0 block chunks, 1 entity chunks, 0 poi chunks in world 'world_nether' in 0.12s
-[20:27:59] [Server thread/INFO]: [ChunkHolderManager] Waiting 60s for chunk I/O to halt for world 'world_nether'
-[20:27:59] [Server thread/INFO]: [ChunkHolderManager] Halted I/O scheduler for world 'world_nether'
-[20:28:00] [Server thread/INFO]: Saving chunks for level 'ServerLevel[world_the_end]'/minecraft:the_end
-[20:28:00] [Server thread/INFO]: [ChunkHolderManager] Waiting 60s for chunk system to halt for world 'world_the_end'
-[20:28:00] [Server thread/INFO]: [ChunkHolderManager] Halted chunk system for world 'world_the_end'
-[20:28:00] [Server thread/INFO]: [ChunkHolderManager] Saving all chunkholders for world 'world_the_end'
-[20:28:00] [Server thread/INFO]: [ChunkHolderManager] Saved 0 block chunks, 10 entity chunks, 0 poi chunks in world 'world_the_end' in 0.20s
-[20:28:00] [Server thread/INFO]: [ChunkHolderManager] Waiting 60s for chunk I/O to halt for world 'world_the_end'
-[20:28:00] [Server thread/INFO]: [ChunkHolderManager] Halted I/O scheduler for world 'world_the_end'
-[20:28:00] [Server thread/INFO]: ThreadedAnvilChunkStorage (world): All chunks are saved
-[20:28:00] [Server thread/INFO]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
-[20:28:00] [Server thread/INFO]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
-[20:28:00] [Server thread/INFO]: ThreadedAnvilChunkStorage: All dimensions are saved
-[20:28:00] [Server thread/INFO]: Waiting for I/O tasks to complete...
-[20:28:00] [Server thread/INFO]: All I/O tasks to complete
-[20:28:00] [Server thread/INFO]: [MoonriseCommon] Awaiting termination of worker pool for up to 60s...
-[20:28:00] [Server thread/INFO]: [MoonriseCommon] Awaiting termination of I/O pool for up to 60s...
+[16:34:33] [ServerMain/INFO]: Environment: Environment[sessionHost=https://sessionserver.mojang.com, servicesHost=https://api.minecraftservices.com, name=PROD]
+[16:34:35] [ServerMain/INFO]: Loaded 1370 recipes
+[16:34:35] [ServerMain/INFO]: Loaded 1481 advancements
+[16:34:35] [ServerMain/INFO]: [MCTypeRegistry] Initialising converters for DataConverter...
+[16:34:36] [ServerMain/INFO]: [MCTypeRegistry] Finished initialising converters for DataConverter in 267.6ms
+[16:34:36] [Server thread/INFO]: Starting minecraft server version 1.21.4
+[16:34:36] [Server thread/INFO]: Loading properties
+[16:34:36] [Server thread/INFO]: This server is running Paper version 1.21.4-194-main@ce30016 (2025-03-08T04:40:16Z) (Implementing API version 1.21.4-R0.1-SNAPSHOT)
+[16:34:36] [Server thread/INFO]: [spark] This server bundles the spark profiler. For more information please visit https://docs.papermc.io/paper/profiling
+[16:34:36] [Server thread/INFO]: Server Ping Player Sample Count: 12
+[16:34:36] [Server thread/INFO]: Using 4 threads for Netty based IO
+[16:34:37] [Server thread/INFO]: [MoonriseCommon] Paper is using 3 worker threads, 1 I/O threads
+[16:34:37] [Server thread/INFO]: [ChunkTaskScheduler] Chunk system is using population gen parallelism: true
+[16:34:37] [Server thread/INFO]: Default game type: CREATIVE
+[16:34:37] [Server thread/INFO]: Generating keypair
+[16:34:37] [Server thread/INFO]: Starting Minecraft server on *:25565
+[16:34:37] [Server thread/INFO]: Using default channel type
+[16:34:38] [Server thread/INFO]: Paper: Using Java compression from Velocity.
+[16:34:38] [Server thread/INFO]: Paper: Using Java cipher from Velocity.
+[16:34:38] [Server thread/INFO]: [PicCraft] Loading server plugin PicCraft v0.1.0
+[16:34:38] [Server thread/INFO]: Server permissions file permissions.yml is empty, ignoring it
+[16:34:38] [Server thread/INFO]: Preparing level "world"
+[16:34:38] [Server thread/INFO]: Preparing start region for dimension minecraft:overworld
+[16:34:38] [Server thread/INFO]: Preparing spawn area: 0%
+[16:34:39] [Server thread/INFO]: Preparing spawn area: 4%
+[16:34:39] [Server thread/INFO]: Time elapsed: 928 ms
+[16:34:39] [Server thread/INFO]: Preparing start region for dimension minecraft:the_nether
+[16:34:39] [Server thread/INFO]: Preparing spawn area: 0%
+[16:34:39] [Server thread/INFO]: Time elapsed: 251 ms
+[16:34:39] [Server thread/INFO]: Preparing start region for dimension minecraft:the_end
+[16:34:39] [Server thread/INFO]: Preparing spawn area: 0%
+[16:34:39] [Server thread/INFO]: Time elapsed: 83 ms
+[16:34:39] [Server thread/INFO]: [PicCraft] Enabling PicCraft v0.1.0
+[16:34:39] [Server thread/INFO]: [PicCraft] Backend URL: http://localhost:8000
+[16:34:39] [Server thread/INFO]: [PicCraft] Poll interval: 3s
+[16:34:39] [Server thread/INFO]: [PicCraft] Blocks/tick: 200
+[16:34:40] [Server thread/INFO]: [PicCraft] Starting job poller (interval: 3s)
+[16:34:40] [Server thread/INFO]: [PicCraft] PicCraft enabled. Polling for builds...
+[16:34:40] [Server thread/INFO]: [spark] Starting background profiler...
+[16:34:40] [Server thread/INFO]: [spark] The async-profiler engine is not supported for your os/arch (macosx/x86_64), so the built-in Java engine will be used instead.
+[16:34:40] [Server thread/INFO]: Done preparing level "world" (2.018s)
+[16:34:40] [Server thread/INFO]: Running delayed init tasks
+[16:34:40] [Server thread/INFO]: Done (16.361s)! For help, type "help"
+[16:35:12] [User Authenticator #0/INFO]: UUID of player B2kkar is afadcbca-3912-4319-b85b-76e675019a00
+[16:35:12] [Server thread/INFO]: B2kkar joined the game
+[16:35:12] [Server thread/INFO]: B2kkar[/127.0.0.1:55882] logged in with entity id 22 at ([world]-16.61914932371008, -60.0, 50.86835219029978)
+[16:35:43] [Async Chat Thread - #1/INFO]: <B2kkar> gamerule doDaylightCycle false
+[16:35:48] [Async Chat Thread - #1/INFO]: <B2kkar> time set day
+[16:37:53] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] Poll found 1 ready stage(s)
+[16:37:53] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] [3368fa5e4a38] Downloaded preview: 1378 blocks
+[16:37:53] [Server thread/INFO]: [PicCraft] [3368fa5e4a38] Executing stage: preview (1378 blocks)
+[16:37:53] [Server thread/INFO]: [PicCraft] [3368fa5e4a38] Origin: -120, -60, 124 facing WEST
+[16:37:53] [Server thread/INFO]: [PicCraft] [3368fa5e4a38] Stage preview placed: 1378 blocks in 304ms
+[16:37:56] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] Poll found 1 ready stage(s)
+[16:37:56] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] [3368fa5e4a38] Downloaded rough: 19596 blocks
+[16:37:56] [Server thread/INFO]: [PicCraft] [3368fa5e4a38] Executing stage: rough (19596 blocks)
+[16:38:01] [Server thread/INFO]: [PicCraft] [3368fa5e4a38] Stage rough placed: 19596 blocks in 5201ms
+[16:39:14] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] Poll found 1 ready stage(s)
+[16:39:14] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] [445c9d0d761e] Downloaded preview: 1542 blocks
+[16:39:14] [Server thread/INFO]: [PicCraft] [445c9d0d761e] Executing stage: preview (1542 blocks)
+[16:39:14] [Server thread/INFO]: [PicCraft] [445c9d0d761e] Origin: -63, -60, 125 facing SOUTH
+[16:39:14] [Server thread/INFO]: [PicCraft] [445c9d0d761e] Stage preview placed: 1542 blocks in 351ms
+[16:39:20] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] Poll found 1 ready stage(s)
+[16:39:20] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] [445c9d0d761e] Downloaded rough: 15054 blocks
+[16:39:20] [Server thread/INFO]: [PicCraft] [445c9d0d761e] Executing stage: rough (15054 blocks)
+[16:39:24] [Server thread/INFO]: [PicCraft] [445c9d0d761e] Stage rough placed: 15054 blocks in 4085ms
+[16:42:05] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] Poll found 1 ready stage(s)
+[16:42:05] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] [ad485b09d320] Downloaded preview: 1703 blocks
+[16:42:05] [Server thread/INFO]: [PicCraft] [ad485b09d320] Executing stage: preview (1703 blocks)
+[16:42:05] [Server thread/INFO]: [PicCraft] [ad485b09d320] Origin: -22, -60, 187 facing SOUTH
+[16:42:05] [Server thread/INFO]: [PicCraft] [ad485b09d320] Stage preview placed: 1703 blocks in 401ms
+[16:42:08] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] Poll found 1 ready stage(s)
+[16:42:08] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] [ad485b09d320] Downloaded rough: 19178 blocks
+[16:42:08] [Server thread/INFO]: [PicCraft] [ad485b09d320] Executing stage: rough (19178 blocks)
+[16:42:13] [Server thread/INFO]: [PicCraft] [ad485b09d320] Stage rough placed: 19178 blocks in 5201ms
+[16:44:08] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] Poll found 1 ready stage(s)
+[16:44:08] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] [f22f4eab2900] Downloaded preview: 1703 blocks
+[16:44:08] [Server thread/INFO]: [PicCraft] [f22f4eab2900] Executing stage: preview (1703 blocks)
+[16:44:08] [Server thread/INFO]: [PicCraft] [f22f4eab2900] Origin: 17, -60, 113 facing EAST
+[16:44:08] [Server thread/INFO]: [PicCraft] [f22f4eab2900] Stage preview placed: 1703 blocks in 397ms
+[16:44:14] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] Poll found 1 ready stage(s)
+[16:44:14] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] [f22f4eab2900] Downloaded rough: 19178 blocks
+[16:44:14] [Server thread/INFO]: [PicCraft] [f22f4eab2900] Executing stage: rough (19178 blocks)
+[16:44:19] [Server thread/INFO]: [PicCraft] [f22f4eab2900] Stage rough placed: 19178 blocks in 5199ms
+[16:44:56] [ForkJoinPool.commonPool-worker-1/WARN]: [PicCraft] Poll /ready failed: java.net.ConnectException
+[16:44:59] [ForkJoinPool.commonPool-worker-1/WARN]: [PicCraft] Poll /ready failed: java.net.ConnectException
+[16:45:02] [ForkJoinPool.commonPool-worker-1/WARN]: [PicCraft] Poll /ready failed: java.net.ConnectException
+[16:45:05] [ForkJoinPool.commonPool-worker-1/WARN]: [PicCraft] Poll /ready failed: java.net.ConnectException
+[16:45:08] [ForkJoinPool.commonPool-worker-1/WARN]: [PicCraft] Poll /ready failed: java.net.ConnectException
+[16:45:35] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] Poll found 1 ready stage(s)
+[16:45:35] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] [f40eae743147] Downloaded preview: 1703 blocks
+[16:45:35] [Server thread/INFO]: [PicCraft] [f40eae743147] Executing stage: preview (1703 blocks)
+[16:45:35] [Server thread/INFO]: [PicCraft] [f40eae743147] Origin: 109, -60, 200 facing SOUTH
+[16:45:35] [Server thread/INFO]: [PicCraft] [f40eae743147] Stage preview placed: 1703 blocks in 399ms
+[16:45:47] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] Poll found 1 ready stage(s)
+[16:45:47] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] [f40eae743147] Downloaded rough: 17325 blocks
+[16:45:47] [Server thread/INFO]: [PicCraft] [f40eae743147] Executing stage: rough (17325 blocks)
+[16:45:52] [Server thread/INFO]: [PicCraft] [f40eae743147] Stage rough placed: 17325 blocks in 4749ms
+[16:46:38] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] Poll found 1 ready stage(s)
+[16:46:38] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] [a2908616a138] Downloaded preview: 2993 blocks
+[16:46:38] [Server thread/INFO]: [PicCraft] [a2908616a138] Executing stage: preview (2993 blocks)
+[16:46:38] [Server thread/INFO]: [PicCraft] [a2908616a138] Origin: 85, -60, 177 facing NORTH
+[16:46:38] [Server thread/INFO]: [PicCraft] [a2908616a138] Stage preview placed: 2993 blocks in 705ms
+[16:46:41] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] Poll found 1 ready stage(s)
+[16:46:41] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] [a2908616a138] Downloaded rough: 34918 blocks
+[16:46:41] [Server thread/INFO]: [PicCraft] [a2908616a138] Executing stage: rough (34918 blocks)
+[16:46:50] [Server thread/INFO]: [PicCraft] [a2908616a138] Stage rough placed: 34918 blocks in 9447ms
+[16:47:50] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] Poll found 1 ready stage(s)
+[16:47:50] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] [bc6fcf9717c4] Downloaded preview: 1542 blocks
+[16:47:50] [Server thread/INFO]: [PicCraft] [bc6fcf9717c4] Executing stage: preview (1542 blocks)
+[16:47:50] [Server thread/INFO]: [PicCraft] [bc6fcf9717c4] Origin: 71, -60, 132 facing NORTH
+[16:47:50] [Server thread/INFO]: [PicCraft] [bc6fcf9717c4] Stage preview placed: 1542 blocks in 350ms
+[16:47:53] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] Poll found 1 ready stage(s)
+[16:47:53] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] [bc6fcf9717c4] Downloaded rough: 16558 blocks
+[16:47:53] [Server thread/INFO]: [PicCraft] [bc6fcf9717c4] Executing stage: rough (16558 blocks)
+[16:47:57] [Server thread/INFO]: [PicCraft] [bc6fcf9717c4] Stage rough placed: 16558 blocks in 4496ms
+[16:49:08] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] Poll found 1 ready stage(s)
+[16:49:08] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] [21bed2136a3c] Downloaded preview: 1509 blocks
+[16:49:08] [Server thread/INFO]: [PicCraft] [21bed2136a3c] Executing stage: preview (1509 blocks)
+[16:49:08] [Server thread/INFO]: [PicCraft] [21bed2136a3c] Origin: 92, -60, 261 facing SOUTH
+[16:49:08] [Server thread/INFO]: [PicCraft] [21bed2136a3c] Stage preview placed: 1509 blocks in 386ms
+[16:49:11] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] Poll found 1 ready stage(s)
+[16:49:11] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] [21bed2136a3c] Downloaded rough: 16285 blocks
+[16:49:11] [Server thread/INFO]: [PicCraft] [21bed2136a3c] Executing stage: rough (16285 blocks)
+[16:49:15] [Server thread/INFO]: [PicCraft] [21bed2136a3c] Stage rough placed: 16285 blocks in 4397ms
+[16:49:50] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] Poll found 1 ready stage(s)
+[16:49:50] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] [2413ec144051] Downloaded preview: 1509 blocks
+[16:49:50] [Server thread/INFO]: [PicCraft] [2413ec144051] Executing stage: preview (1509 blocks)
+[16:49:50] [Server thread/INFO]: [PicCraft] [2413ec144051] Origin: 67, -60, 238 facing SOUTH
+[16:49:50] [Server thread/INFO]: [PicCraft] [2413ec144051] Stage preview placed: 1509 blocks in 351ms
+[16:49:53] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] Poll found 1 ready stage(s)
+[16:49:53] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] [2413ec144051] Downloaded rough: 16285 blocks
+[16:49:53] [Server thread/INFO]: [PicCraft] [2413ec144051] Executing stage: rough (16285 blocks)
+[16:49:57] [Server thread/INFO]: [PicCraft] [2413ec144051] Stage rough placed: 16285 blocks in 4404ms
+[16:53:50] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] Poll found 1 ready stage(s)
+[16:53:50] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] [5272efffa5fa] Downloaded preview: 1509 blocks
+[16:53:50] [Server thread/INFO]: [PicCraft] [5272efffa5fa] Executing stage: preview (1509 blocks)
+[16:53:50] [Server thread/INFO]: [PicCraft] [5272efffa5fa] Origin: -15, -60, 262 facing SOUTH
+[16:53:50] [Server thread/INFO]: [PicCraft] [5272efffa5fa] Stage preview placed: 1509 blocks in 354ms
+[16:53:53] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] Poll found 1 ready stage(s)
+[16:53:53] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] [5272efffa5fa] Downloaded rough: 16285 blocks
+[16:53:53] [Server thread/INFO]: [PicCraft] [5272efffa5fa] Executing stage: rough (16285 blocks)
+[16:53:57] [Server thread/INFO]: [PicCraft] [5272efffa5fa] Stage rough placed: 16285 blocks in 4339ms
+[16:55:05] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] Poll found 1 ready stage(s)
+[16:55:05] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] [8c75d4118bc3] Downloaded preview: 1378 blocks
+[16:55:05] [Server thread/INFO]: [PicCraft] [8c75d4118bc3] Executing stage: preview (1378 blocks)
+[16:55:05] [Server thread/INFO]: [PicCraft] [8c75d4118bc3] Origin: -111, -60, 265 facing SOUTH
+[16:55:05] [Server thread/INFO]: [PicCraft] [8c75d4118bc3] Stage preview placed: 1378 blocks in 300ms
+[16:55:08] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] Poll found 1 ready stage(s)
+[16:55:08] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] [8c75d4118bc3] Downloaded rough: 11781 blocks
+[16:55:08] [Server thread/INFO]: [PicCraft] [8c75d4118bc3] Executing stage: rough (11781 blocks)
+[16:55:11] [Server thread/INFO]: [PicCraft] [8c75d4118bc3] Stage rough placed: 11781 blocks in 3247ms
+[16:58:17] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] Poll found 1 ready stage(s)
+[16:58:17] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] [cd6bdf839100] Downloaded preview: 2448 blocks
+[16:58:17] [Server thread/INFO]: [PicCraft] [cd6bdf839100] Executing stage: preview (2448 blocks)
+[16:58:17] [Server thread/INFO]: [PicCraft] [cd6bdf839100] Origin: -200, -60, 266 facing WEST
+[16:58:17] [Server thread/INFO]: [PicCraft] [cd6bdf839100] Stage preview placed: 2448 blocks in 600ms
+[16:58:20] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] Poll found 1 ready stage(s)
+[16:58:20] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] [cd6bdf839100] Downloaded rough: 22390 blocks
+[16:58:20] [Server thread/INFO]: [PicCraft] [cd6bdf839100] Executing stage: rough (22390 blocks)
+[16:58:26] [Server thread/INFO]: [PicCraft] [cd6bdf839100] Stage rough placed: 22390 blocks in 6198ms
+[17:00:44] [ForkJoinPool.commonPool-worker-1/WARN]: [PicCraft] Poll /ready failed: java.net.ConnectException
+[17:00:47] [ForkJoinPool.commonPool-worker-1/WARN]: [PicCraft] Poll /ready failed: java.net.ConnectException
+[17:00:50] [ForkJoinPool.commonPool-worker-1/WARN]: [PicCraft] Poll /ready failed: java.net.ConnectException
+[17:00:53] [ForkJoinPool.commonPool-worker-1/WARN]: [PicCraft] Poll /ready failed: java.net.ConnectException
+[17:01:26] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] Poll found 1 ready stage(s)
+[17:01:26] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] [f4f3a38f5ccc] Downloaded preview: 2448 blocks
+[17:01:26] [Server thread/INFO]: [PicCraft] [f4f3a38f5ccc] Executing stage: preview (2448 blocks)
+[17:01:26] [Server thread/INFO]: [PicCraft] [f4f3a38f5ccc] Origin: -267, -60, 264 facing WEST
+[17:01:26] [Server thread/INFO]: [PicCraft] [f4f3a38f5ccc] Stage preview placed: 2448 blocks in 599ms
+[17:01:41] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] Poll found 1 ready stage(s)
+[17:01:41] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] [f4f3a38f5ccc] Downloaded rough: 2725 blocks
+[17:01:41] [Server thread/INFO]: [PicCraft] [f4f3a38f5ccc] Executing stage: rough (2725 blocks)
+[17:01:42] [Server thread/INFO]: [PicCraft] [f4f3a38f5ccc] Stage rough placed: 2725 blocks in 1252ms
+[17:02:23] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] Poll found 1 ready stage(s)
+[17:02:23] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] [606296c5a4e9] Downloaded preview: 2448 blocks
+[17:02:23] [Server thread/INFO]: [PicCraft] [606296c5a4e9] Executing stage: preview (2448 blocks)
+[17:02:23] [Server thread/INFO]: [PicCraft] [606296c5a4e9] Origin: -213, -60, 298 facing SOUTH
+[17:02:23] [Server thread/INFO]: [PicCraft] [606296c5a4e9] Stage preview placed: 2448 blocks in 600ms
+[17:02:26] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] Poll found 1 ready stage(s)
+[17:02:26] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] [606296c5a4e9] Downloaded rough: 2725 blocks
+[17:02:26] [Server thread/INFO]: [PicCraft] [606296c5a4e9] Executing stage: rough (2725 blocks)
+[17:02:27] [Server thread/INFO]: [PicCraft] [606296c5a4e9] Stage rough placed: 2725 blocks in 1250ms
+[17:02:35] [ForkJoinPool.commonPool-worker-1/WARN]: [PicCraft] Poll /ready failed: java.net.ConnectException
+[17:02:38] [ForkJoinPool.commonPool-worker-1/WARN]: [PicCraft] Poll /ready failed: java.net.ConnectException
+[17:02:41] [ForkJoinPool.commonPool-worker-1/WARN]: [PicCraft] Poll /ready failed: java.net.ConnectException
+[17:02:44] [ForkJoinPool.commonPool-worker-1/WARN]: [PicCraft] Poll /ready failed: java.net.ConnectException
+[17:03:14] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] Poll found 1 ready stage(s)
+[17:03:14] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] [468e41723204] Downloaded preview: 2448 blocks
+[17:03:14] [Server thread/INFO]: [PicCraft] [468e41723204] Executing stage: preview (2448 blocks)
+[17:03:14] [Server thread/INFO]: [PicCraft] [468e41723204] Origin: -298, -60, 314 facing WEST
+[17:03:14] [Server thread/INFO]: [PicCraft] [468e41723204] Stage preview placed: 2448 blocks in 602ms
+[17:03:17] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] Poll found 1 ready stage(s)
+[17:03:17] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] [468e41723204] Downloaded rough: 22390 blocks
+[17:03:17] [Server thread/INFO]: [PicCraft] [468e41723204] Executing stage: rough (22390 blocks)
+[17:03:23] [Server thread/INFO]: [PicCraft] [468e41723204] Stage rough placed: 22390 blocks in 6199ms
+[17:04:20] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] Poll found 1 ready stage(s)
+[17:04:20] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] [3d4d437cc0d7] Downloaded preview: 2983 blocks
+[17:04:20] [Server thread/INFO]: [PicCraft] [3d4d437cc0d7] Executing stage: preview (2983 blocks)
+[17:04:20] [Server thread/INFO]: [PicCraft] [3d4d437cc0d7] Origin: -232, -60, 339 facing SOUTH
+[17:04:20] [Server thread/INFO]: [PicCraft] [3d4d437cc0d7] Stage preview placed: 2983 blocks in 702ms
+[17:04:26] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] Poll found 1 ready stage(s)
+[17:04:26] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] [3d4d437cc0d7] Downloaded rough: 24037 blocks
+[17:04:26] [Server thread/INFO]: [PicCraft] [3d4d437cc0d7] Executing stage: rough (24037 blocks)
+[17:04:33] [Server thread/INFO]: [PicCraft] [3d4d437cc0d7] Stage rough placed: 24037 blocks in 6750ms
+[17:07:26] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] Poll found 1 ready stage(s)
+[17:07:26] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] [704091999b16] Downloaded preview: 2983 blocks
+[17:07:26] [Server thread/INFO]: [PicCraft] [704091999b16] Executing stage: preview (2983 blocks)
+[17:07:26] [Server thread/INFO]: [PicCraft] [704091999b16] Origin: -346, -60, 387 facing WEST
+[17:07:26] [Server thread/INFO]: [PicCraft] [704091999b16] Stage preview placed: 2983 blocks in 692ms
+[17:07:29] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] Poll found 1 ready stage(s)
+[17:07:29] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] [704091999b16] Downloaded rough: 24037 blocks
+[17:07:29] [Server thread/INFO]: [PicCraft] [704091999b16] Executing stage: rough (24037 blocks)
+[17:07:36] [Server thread/INFO]: [PicCraft] [704091999b16] Stage rough placed: 24037 blocks in 6750ms
+[17:11:14] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] Poll found 1 ready stage(s)
+[17:11:14] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] [9f11027c9674] Downloaded preview: 1290 blocks
+[17:11:14] [Server thread/INFO]: [PicCraft] [9f11027c9674] Executing stage: preview (1290 blocks)
+[17:11:14] [Server thread/INFO]: [PicCraft] [9f11027c9674] Origin: -267, -60, 405 facing SOUTH
+[17:11:14] [Server thread/INFO]: [PicCraft] [9f11027c9674] Stage preview placed: 1290 blocks in 304ms
+[17:11:17] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] Poll found 1 ready stage(s)
+[17:11:17] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] [9f11027c9674] Downloaded rough: 15491 blocks
+[17:11:17] [Server thread/INFO]: [PicCraft] [9f11027c9674] Executing stage: rough (15491 blocks)
+[17:11:21] [Server thread/INFO]: [PicCraft] [9f11027c9674] Stage rough placed: 15491 blocks in 4153ms
+[17:12:29] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] Poll found 1 ready stage(s)
+[17:12:29] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] [325b0cdf03f3] Downloaded preview: 1509 blocks
+[17:12:29] [Server thread/INFO]: [PicCraft] [325b0cdf03f3] Executing stage: preview (1509 blocks)
+[17:12:29] [Server thread/INFO]: [PicCraft] [325b0cdf03f3] Origin: -189, -60, 358 facing NORTH
+[17:12:29] [Server thread/INFO]: [PicCraft] [325b0cdf03f3] Stage preview placed: 1509 blocks in 352ms
+[17:12:35] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] Poll found 1 ready stage(s)
+[17:12:35] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] [325b0cdf03f3] Downloaded rough: 16285 blocks
+[17:12:35] [Server thread/INFO]: [PicCraft] [325b0cdf03f3] Executing stage: rough (16285 blocks)
+[17:12:39] [Server thread/INFO]: [PicCraft] [325b0cdf03f3] Stage rough placed: 16285 blocks in 4403ms
+[17:17:26] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] Poll found 1 ready stage(s)
+[17:17:26] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] [67130751c968] Downloaded preview: 1338 blocks
+[17:17:26] [Server thread/INFO]: [PicCraft] [67130751c968] Executing stage: preview (1338 blocks)
+[17:17:26] [Server thread/INFO]: [PicCraft] [67130751c968] Origin: 48, -60, 82 facing WEST
+[17:17:26] [Server thread/INFO]: [PicCraft] [67130751c968] Stage preview placed: 1338 blocks in 301ms
+[17:17:32] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] Poll found 1 ready stage(s)
+[17:17:32] [ForkJoinPool.commonPool-worker-1/INFO]: [PicCraft] [67130751c968] Downloaded rough: 15552 blocks
+[17:17:32] [Server thread/INFO]: [PicCraft] [67130751c968] Executing stage: rough (15552 blocks)
+[17:17:36] [Server thread/INFO]: [PicCraft] [67130751c968] Stage rough placed: 15552 blocks in 4203ms

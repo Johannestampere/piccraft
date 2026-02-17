@@ -30,7 +30,16 @@ public class PlacementCalculator {
         int originX = px + facing.forwardX * forwardOffset - facing.rightX * halfWidth;
         int originZ = pz + facing.forwardZ * forwardOffset - facing.rightZ * halfWidth;
 
-        return new Location(player.getWorld(), originX, py, originZ);
+        // Find ground level at the origin XZ by scanning down from player Y
+        int groundY = py;
+        for (int y = py; y >= player.getWorld().getMinHeight(); y--) {
+            if (!player.getWorld().getBlockAt(originX, y, originZ).getType().isAir()) {
+                groundY = y + 1;
+                break;
+            }
+        }
+
+        return new Location(player.getWorld(), originX, groundY, originZ);
     }
 
     /**

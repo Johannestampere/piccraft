@@ -26,6 +26,7 @@ from app.pipeline.segment import segment_subject, save_segmentation
 from app.pipeline.stage0_preview import generate_preview
 from app.pipeline.depth import estimate_depth
 from app.pipeline.voxelizer import voxelize
+from app.pipeline.stage2_360 import generate_360
 
 logger = logging.getLogger(__name__)
 

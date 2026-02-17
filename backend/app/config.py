@@ -8,7 +8,7 @@ class Settings(BaseSettings):
     storage_dir: str = "./storage"
 
     stage0_grid_size: int = 64
-    stage1_voxel_size: int = 32
+    stage1_voxel_size: int = 64
     stage2_voxel_size: int = 64
 
     max_image_size_mb: int = 20

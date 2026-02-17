@@ -41,7 +41,7 @@ def voxelize(cutout_path: str, depth_map: np.ndarray, job_id: str, voxel_size: i
         Image.fromarray(depth_map).resize((voxel_size, voxel_size), Image.LANCZOS)
     )
 
-    max_depth = voxel_size // 4  # 8 blocks deep for 32^3
+    max_depth = voxel_size // 4  # 16 blocks deep for 32^3
 
     # Get block names for all pixels at once (flat array)
     opaque_mask = alpha > 128
@@ -80,7 +80,9 @@ def voxelize(cutout_path: str, depth_map: np.ndarray, job_id: str, voxel_size: i
             # y is flipped: row 0 = top of image = top of build
             y = voxel_size - 1 - row
 
-            for z in range(z_extent):
+            # Extrude from the back: flat back at z=max_depth-1, textured front
+            z_start = max_depth - z_extent
+            for z in range(z_start, max_depth):
                 blocks.append(BuildPlanBlock(x=col, y=y, z=z, block=block_name))
 
             palette_set.add(block_name)

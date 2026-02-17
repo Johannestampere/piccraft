@@ -13,6 +13,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Pre-download rembg model
 RUN python -c "from rembg import new_session; new_session('u2net')"
 
+# Pre-download Depth Anything V2 Base model
+RUN python -c "from transformers import AutoImageProcessor, AutoModelForDepthEstimation; AutoImageProcessor.from_pretrained('depth-anything/Depth-Anything-V2-Base-hf'); AutoModelForDepthEstimation.from_pretrained('depth-anything/Depth-Anything-V2-Base-hf')"
+
 COPY app/ ./app/
 
 EXPOSE 8000
