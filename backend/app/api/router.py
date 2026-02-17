@@ -107,6 +107,21 @@ async def create_job(file: UploadFile = File(...)):
     return JobCreated(job_id=job_id)
 
 
+# Plugin polls this to discover completed stages
+@router.get("/jobs/ready", response_model=ReadyResponse)
+async def get_ready_stages():
+    items: list[ReadyStage] = []
+
+    # Drain the ready list
+    while True:
+        raw = _redis.lpop("piccraft:ready")
+        if raw is None:
+            break
+        items.append(ReadyStage(**json.loads(raw)))
+
+    return ReadyResponse(ready=items)
+
+
 @router.get("/jobs/{job_id}", response_model=JobState)
 async def get_job(job_id: str):
     state = _get_job_state(job_id)
@@ -122,18 +137,3 @@ async def get_build_plan(job_id: str, stage: StageName):
     if plan is None:
         raise HTTPException(404, "Build plan not ready")
     return plan
-
-
-# Plugin polls this to discover completed stages
-@router.get("/jobs/ready", response_model=ReadyResponse)
-async def get_ready_stages():
-    items: list[ReadyStage] = []
-
-    # Drain the ready list
-    while True:
-        raw = _redis.lpop("piccraft:ready")
-        if raw is None:
-            break
-        items.append(ReadyStage(**json.loads(raw)))
-
-    return ReadyResponse(ready=items)
