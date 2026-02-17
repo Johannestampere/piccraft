@@ -160,7 +160,25 @@ def run_pipeline(job_id: str) -> None:
         logger.exception(f"[{job_id}] Stage 1 failed")
         _mark_job_failed(job_id, StageName.rough)
 
-    # Stage 2: TODO
+    # Stage 2
+    try:
+        _mark_stage_started(job_id, StageName.final)
+        t0 = time.perf_counter()
+
+        plan = generate_360(
+            cutout_path=cutout_path,
+            depth_map=depth_map,
+            job_id=job_id,
+            voxel_size=settings.stage2_voxel_size,
+        )
+        save_build_plan(job_id, stage=2, plan=plan)
+
+        final_ms = int((time.perf_counter() - t0) * 1000)
+        _mark_stage_completed(job_id, StageName.final, final_ms)
+        logger.info(f"[{job_id}] Stage 2 done in {final_ms}ms")
+    except Exception:
+        logger.exception(f"[{job_id}] Stage 2 failed")
+        _mark_job_failed(job_id, StageName.final)
 
     # Mark job completed
     state = _load_state(job_id)
