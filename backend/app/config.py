@@ -10,6 +10,8 @@ class Settings(BaseSettings):
     stage0_grid_size: int = 64
     stage1_voxel_size: int = 64
 
+    tripo_api_key: str = ""
+
     max_image_size_mb: int = 20
 
     class Config:
