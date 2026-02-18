@@ -12,7 +12,7 @@ from pathlib import Path
 
 import httpx
 import numpy as np
-import trimesh
+import trimesh      # lib for working with triangle meshes
 from scipy.spatial import cKDTree
 
 from app.config import settings
@@ -145,26 +145,47 @@ async def _generate_glb(image_path: str, glb_path: str) -> None:
 
 # Return (N, 3) float32 RGB colors for each sample face index.
 # Tries UV+texture first, then to_color(), then gray fallback.
+# Inputs:
+#   geom - triangle mesh
+#   fidx - array of triangle indices
 def _sample_mesh_colors(geom: trimesh.Trimesh, fidx: np.ndarray) -> np.ndarray:
 
-    # Method 1
+    # Method 1: UV texture sampling
     try:
-        visual = geom.visual
-        uv = getattr(visual, "uv", None)
+        visual = geom.visual # get the mesh appearance data (UV coords, materials, face/vertex colors)
+
+        uv = getattr(visual, "uv", None) # UV has shape (V, 2) - one row for each vertex, row[0] = U, row[1] = V
+
         if uv is not None and len(uv) > 0:
-            material = getattr(visual, "material", None)
+            material = getattr(visual, "material", None) # get the texture images
+
             tex_img = None
+
             if material is not None:
                 tex_img = getattr(material, "baseColorTexture", None) or getattr(material, "image", None)
+
+            # For each triangle, figure out where the triangle sits on the texture image via UV-s
+            # and grab the RBG pixel from that location.
             if tex_img is not None:
+                # convert tex_img into RGB format, shape (H, W, 3)
                 tex = np.array(tex_img.convert("RGB"), dtype=np.float32)
+                # now tex[y, x] returns an RGB color
+
                 H, W = tex.shape[:2]
                 uv_arr = np.array(uv)  # (V, 2)
+
                 # Average UV across the 3 vertices of each sampled face
+                #   geom.faces[fidx] - (N, 3) vertex indices
+                #   uv_arr[geom.faces[fidx]] - (N, 3, 2) UV's for each face's 3 vertices
+                #   .mean(axis=1) - (N,2) one representative UV per sampled face
                 face_uv = uv_arr[geom.faces[fidx]].mean(axis=1)  # (N, 2)
+
+                # Convert UV coordinates into pixel coordinates
                 px = np.clip((face_uv[:, 0] * W).astype(int), 0, W - 1)
                 py = np.clip(((1.0 - face_uv[:, 1]) * H).astype(int), 0, H - 1)
+
                 return tex[py, px]
+
     except Exception as e:
         logger.debug(f"UV texture sampling failed: {e}")
 
@@ -204,11 +225,15 @@ def _voxelize_mesh(glb_path: str, voxel_size: int) -> tuple[np.ndarray, np.ndarr
     scale = (voxel_size - 1) / max(extents)
     translation = -bounds[0]
 
-    # Sample colors per-mesh before concatenating
+    # Decide how many surface samples per submesh
     n_per_mesh = max(500, (voxel_size * voxel_size * 20) // len(scene_geoms))
     all_points: list[np.ndarray] = []
     all_colors: list[np.ndarray] = []
 
+    # For each submesh, 
+    # sample N_PER_MESH random points on its surface,
+    # compute an RGB color for each sampled point using _sample_mesh_colors,
+    # store them
     for geom in scene_geoms.values():
         try:
             pts, fidx = trimesh.sample.sample_surface(geom, n_per_mesh)
@@ -236,6 +261,7 @@ def _voxelize_mesh(glb_path: str, voxel_size: int) -> tuple[np.ndarray, np.ndarr
     # Bin surface points into voxels, averaging colors per cell
     surf_coords = np.clip(np.floor(points).astype(int), 0, voxel_size - 1)
     vox_color: dict[tuple, list] = {}
+
     for coord, color in zip(map(tuple, surf_coords), sample_colors):
         vox_color.setdefault(coord, []).append(color)
 
@@ -291,6 +317,7 @@ def generate_tripo(cutout_path: str, job_id: str, voxel_size: int = 64) -> Build
 
     blocks: list[BuildPlanBlock] = []
     palette_set: set[str] = set()
+    
     for (x, y, z), block in zip(coords, block_names):
         blocks.append(BuildPlanBlock(x=int(x), y=int(y), z=int(z), block=block))
         palette_set.add(block)
