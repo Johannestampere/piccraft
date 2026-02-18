@@ -1,7 +1,7 @@
 """
 Celery tasks for the pipeline.
 
-run_pipeline chains: segment -> stage0 (preview stage).
+run_pipeline chains: segment -> stage0 (preview stage) -> stage1 (3D depth relief).
 """
 
 import json
@@ -25,7 +25,7 @@ from app.storage.local import get_upload_path, save_build_plan
 from app.pipeline.segment import segment_subject, save_segmentation
 from app.pipeline.stage0_preview import generate_preview
 from app.pipeline.depth import estimate_depth
-from app.pipeline.stage2_360 import generate_360
+from app.pipeline.stage1_depth import generate_360
 
 logger = logging.getLogger(__name__)
 
