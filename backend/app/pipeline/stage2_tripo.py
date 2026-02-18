@@ -76,6 +76,10 @@ async def _create_task(client: httpx.AsyncClient, file_token: str) -> str:
         },
         timeout=30,
     )
+
+    if resp.status_code != 200:
+        logger.error(f"Tripo task creation failed {resp.status_code}: {resp.text}")
+        
     resp.raise_for_status()
     body = resp.json()
     task_id = body["data"]["task_id"]
@@ -98,7 +102,19 @@ async def _poll_task(client: httpx.AsyncClient, task_id: str, timeout: int = 300
         logger.info(f"Tripo task {task_id} status: {status}")
 
         if status == "success":
-            url = data["output"]["model"]["url"]
+            output = data.get("output", {})
+            logger.info(f"Tripo output: {output}")
+            # model is a direct URL string (not a nested object)
+            url = (
+                output.get("model")
+                or output.get("base_model")
+                or output.get("pbr_model")
+            )
+            if not url:
+                raise RuntimeError(f"No model URL in Tripo output: {output}")
+            # handle if API returns a dict with url key instead of plain string
+            if isinstance(url, dict):
+                url = url["url"]
             return url
         if status in ("failed", "cancelled", "unknown"):
             raise RuntimeError(f"Tripo task {task_id} ended with status: {status}")
@@ -127,6 +143,43 @@ async def _generate_glb(image_path: str, glb_path: str) -> None:
 
 
 
+# Return (N, 3) float32 RGB colors for each sample face index.
+# Tries UV+texture first, then to_color(), then gray fallback.
+def _sample_mesh_colors(geom: trimesh.Trimesh, fidx: np.ndarray) -> np.ndarray:
+
+    # Method 1
+    try:
+        visual = geom.visual
+        uv = getattr(visual, "uv", None)
+        if uv is not None and len(uv) > 0:
+            material = getattr(visual, "material", None)
+            tex_img = None
+            if material is not None:
+                tex_img = getattr(material, "baseColorTexture", None) or getattr(material, "image", None)
+            if tex_img is not None:
+                tex = np.array(tex_img.convert("RGB"), dtype=np.float32)
+                H, W = tex.shape[:2]
+                uv_arr = np.array(uv)  # (V, 2)
+                # Average UV across the 3 vertices of each sampled face
+                face_uv = uv_arr[geom.faces[fidx]].mean(axis=1)  # (N, 2)
+                px = np.clip((face_uv[:, 0] * W).astype(int), 0, W - 1)
+                py = np.clip(((1.0 - face_uv[:, 1]) * H).astype(int), 0, H - 1)
+                return tex[py, px]
+    except Exception as e:
+        logger.debug(f"UV texture sampling failed: {e}")
+
+    # Method 2
+    try:
+        cv = geom.visual.to_color()
+        return cv.face_colors[fidx, :3].astype(np.float32)
+    except Exception as e:
+        logger.debug(f"to_color() failed: {e}")
+
+    # Method 
+    logger.warning("All color methods failed for submesh, using grey")
+    return np.full((len(fidx), 3), 180.0, dtype=np.float32)
+
+
 # Mesh voxelization
 # Returns:
 #   coords: (N, 3) int array of (x, y, z) voxel positions
@@ -135,33 +188,50 @@ def _voxelize_mesh(glb_path: str, voxel_size: int) -> tuple[np.ndarray, np.ndarr
 
     scene = trimesh.load(glb_path, force="scene")
 
-    # Merge all meshes in the scene
-    if isinstance(scene, trimesh.Scene):
-        geoms = list(scene.geometry.values())
-        if not geoms:
-            raise ValueError("No geometry in GLB")
-        mesh = trimesh.util.concatenate(geoms)
+    if not isinstance(scene, trimesh.Scene):
+        scene_geoms = {"mesh": scene}
     else:
-        mesh = scene
+        scene_geoms = scene.geometry
 
-    # Normalize: fit the longest axis into voxel_size
-    bounds = mesh.bounds
+    if not scene_geoms:
+        raise ValueError("No geometry in GLB")
+
+    # Compute scene-level bounds for normalization using merged mesh
+    raw_meshes = list(scene_geoms.values())
+    merged_raw = trimesh.util.concatenate(raw_meshes)
+    bounds = merged_raw.bounds
     extents = bounds[1] - bounds[0]
     scale = (voxel_size - 1) / max(extents)
-    mesh.apply_translation(-bounds[0])
-    mesh.apply_scale(scale)
+    translation = -bounds[0]
 
-    # Surface sampling for color coverage
-    n_surface = voxel_size * voxel_size * 20
-    try:
-        points, face_idx = trimesh.sample.sample_surface(mesh, n_surface)
-        color_vis = mesh.visual.to_color()
-        face_colors = color_vis.face_colors[:, :3].astype(np.float32)
-        sample_colors = face_colors[face_idx]
-    except Exception:
-        logger.warning("Color sampling failed, using grey fallback")
-        points = trimesh.sample.sample_surface(mesh, n_surface)[0]
-        sample_colors = np.full((len(points), 3), 180.0, dtype=np.float32)
+    # Sample colors per-mesh before concatenating
+    n_per_mesh = max(500, (voxel_size * voxel_size * 20) // len(scene_geoms))
+    all_points: list[np.ndarray] = []
+    all_colors: list[np.ndarray] = []
+
+    for geom in scene_geoms.values():
+        try:
+            pts, fidx = trimesh.sample.sample_surface(geom, n_per_mesh)
+            # Apply the same normalization as the merged mesh
+            pts = (pts + translation) * scale
+
+            sc = _sample_mesh_colors(geom, fidx)
+
+            all_points.append(pts)
+            all_colors.append(sc)
+        except Exception as e:
+            logger.warning(f"Sampling failed for submesh: {e}")
+
+    if not all_points:
+        raise ValueError("Could not sample any points from GLB")
+
+    points = np.concatenate(all_points)
+    sample_colors = np.concatenate(all_colors)
+
+    # Use merged + normalized mesh for voxelization only
+    mesh = merged_raw
+    mesh.apply_translation(translation)
+    mesh.apply_scale(scale)
 
     # Bin surface points into voxels, averaging colors per cell
     surf_coords = np.clip(np.floor(points).astype(int), 0, voxel_size - 1)

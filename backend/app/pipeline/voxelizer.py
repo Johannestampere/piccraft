@@ -1,4 +1,5 @@
 """
+UNUSED.
 Voxelizer — converts a cutout image + depth map into a 3D BuildPlan.
 """
 
