@@ -72,7 +72,7 @@ def generate_360(
 
         return BuildPlan(
             job_id=job_id,
-            stage=StageName.final,
+            stage=StageName.rough,
             dimensions=BuildPlanDimensions(
                 width=voxel_size,
                 height=voxel_size,
@@ -176,7 +176,7 @@ def generate_360(
 
     return BuildPlan(
         job_id=job_id,
-        stage=StageName.final,
+        stage=StageName.rough,
         dimensions=BuildPlanDimensions(
             width=voxel_size,
             height=voxel_size,
