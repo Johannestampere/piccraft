@@ -206,14 +206,14 @@ def _voxelize_mesh(glb_path: str, voxel_size: int) -> tuple[np.ndarray, np.ndarr
 
 
 # Public entrypoint
-def generate_tripo(upload_path: str, job_id: str, voxel_size: int = 64) -> BuildPlan:
+def generate_tripo(cutout_path: str, job_id: str, voxel_size: int = 64) -> BuildPlan:
     start = time.perf_counter()
 
     with tempfile.TemporaryDirectory() as tmp_dir:
         glb_path = str(Path(tmp_dir) / f"{job_id}.glb")
 
         # Run async Tripo pipeline synchronously inside Celery task
-        asyncio.run(_generate_glb(upload_path, glb_path))
+        asyncio.run(_generate_glb(cutout_path, glb_path))
 
         coords, colors = _voxelize_mesh(glb_path, voxel_size)
 

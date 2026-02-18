@@ -26,6 +26,7 @@ from app.pipeline.segment import segment_subject, save_segmentation
 from app.pipeline.stage0_preview import generate_preview
 from app.pipeline.depth import estimate_depth
 from app.pipeline.stage1_depth import generate_360
+from app.pipeline.stage2_tripo import generate_tripo
 
 logger = logging.getLogger(__name__)
 
@@ -159,14 +160,17 @@ def run_pipeline(job_id: str) -> None:
         logger.exception(f"[{job_id}] Stage 1 failed")
         _mark_job_failed(job_id, StageName.rough)
 
-    # Stage 2: Tripo AI 3D (stub)
+    # Stage 2: Tripo AI image-to-3D
     try:
         _mark_stage_started(job_id, StageName.final)
         t0 = time.perf_counter()
 
-        # TODO: call Tripo AI API with upload_path, receive 3D mesh,
-        # voxelize mesh into BuildPlan, save_build_plan(job_id, stage=2, plan=plan)
-        logger.info(f"[{job_id}] Stage 2 (Tripo AI) — stubbed, skipping")
+        plan = generate_tripo(
+            cutout_path=str(cutout_path),
+            job_id=job_id,
+            voxel_size=settings.stage2_voxel_size,
+        )
+        save_build_plan(job_id, stage=2, plan=plan)
 
         final_ms = int((time.perf_counter() - t0) * 1000)
         _mark_stage_completed(job_id, StageName.final, final_ms)
