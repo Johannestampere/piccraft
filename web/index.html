@@ -109,7 +109,8 @@
 </div>
 
 <script>
-const BACKEND = 'http://localhost:8000'; // swap for ngrok URL when deployed
+const BACKEND = 'https://secondsighted-stacy-ungodlily.ngrok-free.dev';
+const NGROK_HEADERS = { 'ngrok-skip-browser-warning': 'true' };
 
 let blob     = null;
 let jobId    = null;
@@ -163,7 +164,7 @@ async function handleCraft() {
   try {
     const form = new FormData();
     form.append('file', blob, 'photo.jpg');
-    const resp = await fetch(`${BACKEND}/api/v0/jobs`, { method: 'POST', body: form });
+    const resp = await fetch(`${BACKEND}/api/v0/jobs`, { method: 'POST', body: form, headers: NGROK_HEADERS });
     if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
     const job = await resp.json();
     jobId = job.job_id;
@@ -178,7 +179,7 @@ function startPolling() {
   if (pollTimer) clearInterval(pollTimer);
   pollTimer = setInterval(async () => {
     try {
-      const resp = await fetch(`${BACKEND}/api/v0/jobs/${jobId}`);
+      const resp = await fetch(`${BACKEND}/api/v0/jobs/${jobId}`, { headers: NGROK_HEADERS });
       if (!resp.ok) return;
       const job = await resp.json();
       updateDots(job.stages || {});
