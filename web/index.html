@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <title>PicCraft</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+  <style>
+    * { font-family: 'Press Start 2P', monospace; box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #1A1A1A; color: #F0F0F0; height: 100dvh; overflow: hidden; }
+
+    .screen { display: none; height: 100dvh; flex-direction: column; align-items: center; justify-content: center; padding: 24px; gap: 28px; }
+    .screen.active { display: flex; }
+
+    #screen-camera { padding: 0; justify-content: flex-end; position: relative; }
+
+    #video {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      background: #000;
+    }
+
+    .camera-ui {
+      position: relative; z-index: 10;
+      width: 100%; padding: 24px 32px 40px;
+      display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(transparent, rgba(0,0,0,0.7));
+    }
+
+    .capture-btn {
+      width: 80px; height: 80px;
+      background: #fff;
+      border: 5px solid #888;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+    }
+    .capture-btn-inner {
+      width: 56px; height: 56px;
+      background: #5D9B3D;
+      border: 4px solid #3D6B27;
+    }
+    .capture-btn:active .capture-btn-inner { background: #3D6B27; }
+
+    .mc-btn {
+      padding: 14px 22px; font-size: 10px; cursor: pointer;
+      border: none; border-bottom: 5px solid; border-right: 5px solid;
+      color: #fff; text-shadow: 1px 1px 0 #000;
+      transition: transform 0.08s;
+    }
+    .mc-btn:active { transform: translate(2px, 2px); border-bottom-width: 2px; border-right-width: 2px; }
+    .mc-green { background: #5D9B3D; border-color: #3D6B27; }
+    .mc-dirt  { background: #8B6541; border-color: #5C4128; }
+
+    .mc-title { color: #FFD700; text-shadow: 3px 3px 0 #000; font-size: 26px; }
+
+    #preview-img { width: 100%; max-height: 55dvh; object-fit: cover; display: block; }
+
+    .stage-row { display: flex; align-items: center; gap: 14px; padding: 14px 0; border-bottom: 2px solid #2a2a2a; width: 100%; }
+    .dot { width: 18px; height: 18px; flex-shrink: 0; border: 3px solid #444; }
+    .dot.done    { background: #5D9B3D; border-color: #3D6B27; }
+    .dot.running { background: #FFD700; border-color: #B89900; animation: blink 0.9s infinite; }
+    .dot.pending { background: #2D2D2D; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+    .msg { font-size: 10px; line-height: 24px; color: #aaa; text-align: center; }
+
+    canvas { display: none; }
+  </style>
+</head>
+<body>
+
+<div id="screen-camera" class="screen active">
+  <video id="video" autoplay playsinline muted></video>
+  <canvas id="canvas"></canvas>
+  <div class="camera-ui">
+    <div class="capture-btn" id="btn-capture">
+      <div class="capture-btn-inner"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Preview -->
+<div id="screen-preview" class="screen">
+  <h1 class="mc-title">PICCRAFT</h1>
+  <img id="preview-img" src="" alt="preview" />
+  <div style="display:flex;gap:24px">
+    <button class="mc-btn mc-dirt" id="btn-retake">RETAKE</button>
+    <button class="mc-btn mc-green" id="btn-craft">CRAFT IT</button>
+  </div>
+</div>
+
+<!-- Status -->
+<div id="screen-status" class="screen">
+  <h1 class="mc-title">PICCRAFT</h1>
+  <div style="width:100%;max-width:400px">
+    <div class="stage-row"><div class="dot pending" id="dot-preview"></div><span id="lbl-preview" style="font-size:9px;color:#444">STAGE 0  MOSAIC</span></div>
+    <div class="stage-row"><div class="dot pending" id="dot-rough"  ></div><span id="lbl-rough"   style="font-size:9px;color:#444">STAGE 1  DEPTH 3D</span></div>
+    <div class="stage-row"><div class="dot pending" id="dot-final"  ></div><span id="lbl-final"   style="font-size:9px;color:#444">STAGE 2  TRIPO 3D</span></div>
+  </div>
+  <p id="status-footer" style="font-size:9px;color:#333;text-align:center;line-height:22px"></p>
+  <button class="mc-btn mc-green" id="btn-new" style="display:none">NEW PHOTO</button>
+</div>
+
+<!-- Permission denied -->
+<div id="screen-error" class="screen">
+  <h1 class="mc-title">PICCRAFT</h1>
+  <p class="msg">CAMERA ACCESS<br>DENIED<br><br>ALLOW CAMERA IN<br>BROWSER SETTINGS</p>
+</div>
+
+<script>
+const BACKEND = 'http://localhost:8000'; // swap for ngrok URL when deployed
+
+let blob     = null;
+let jobId    = null;
+let pollTimer = null;
+
+function show(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+const video  = document.getElementById('video');
+const canvas = document.getElementById('canvas');
+
+async function startCamera() {
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({
+      video: { facingMode: 'environment', width: { ideal: 1920 }, height: { ideal: 1080 } },
+      audio: false,
+    });
+    video.srcObject = stream;
+  } catch (e) {
+    show('screen-error');
+  }
+}
+
+document.getElementById('btn-capture').addEventListener('click', () => {
+  canvas.width  = video.videoWidth;
+  canvas.height = video.videoHeight;
+  canvas.getContext('2d').drawImage(video, 0, 0);
+
+  canvas.toBlob(b => {
+    blob = b;
+    document.getElementById('preview-img').src = URL.createObjectURL(b);
+    show('screen-preview');
+  }, 'image/jpeg', 0.88);
+});
+
+document.getElementById('btn-retake').addEventListener('click', () => {
+  blob = null;
+  show('screen-camera');
+});
+
+document.getElementById('btn-craft').addEventListener('click', handleCraft);
+
+async function handleCraft() {
+  jobId = null;
+  resetDots();
+  show('screen-status');
+  document.getElementById('status-footer').textContent = 'UPLOADING...';
+
+  try {
+    const form = new FormData();
+    form.append('file', blob, 'photo.jpg');
+    const resp = await fetch(`${BACKEND}/api/v0/jobs`, { method: 'POST', body: form });
+    if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+    const job = await resp.json();
+    jobId = job.job_id;
+    document.getElementById('status-footer').textContent = '';
+    startPolling();
+  } catch (e) {
+    document.getElementById('status-footer').textContent = 'ERROR: ' + e.message;
+  }
+}
+
+function startPolling() {
+  if (pollTimer) clearInterval(pollTimer);
+  pollTimer = setInterval(async () => {
+    try {
+      const resp = await fetch(`${BACKEND}/api/v0/jobs/${jobId}`);
+      if (!resp.ok) return;
+      const job = await resp.json();
+      updateDots(job.stages || {});
+      if (job.status === 'completed') {
+        clearInterval(pollTimer);
+        document.getElementById('status-footer').textContent = '✔ CHECK MINECRAFT!';
+        document.getElementById('status-footer').style.color = '#5D9B3D';
+        document.getElementById('btn-new').style.display = 'inline-block';
+      } else if (job.status === 'failed') {
+        clearInterval(pollTimer);
+        document.getElementById('status-footer').textContent = 'PIPELINE FAILED';
+        document.getElementById('status-footer').style.color = '#c0392b';
+        document.getElementById('btn-new').style.display = 'inline-block';
+      }
+    } catch (_) {}
+  }, 3000);
+}
+
+const STAGE_KEYS = ['preview', 'rough', 'final'];
+
+function resetDots() {
+  for (const k of STAGE_KEYS) {
+    const dot = document.getElementById(`dot-${k}`);
+    const lbl = document.getElementById(`lbl-${k}`);
+    dot.className = 'dot pending';
+    lbl.style.color = '#444';
+  }
+  document.getElementById('status-footer').textContent = '';
+  document.getElementById('status-footer').style.color = '#333';
+  document.getElementById('btn-new').style.display = 'none';
+}
+
+function updateDots(stages) {
+  for (const k of STAGE_KEYS) {
+    const st  = stages[k]?.status || 'pending';
+    const dot = document.getElementById(`dot-${k}`);
+    const lbl = document.getElementById(`lbl-${k}`);
+    dot.className = `dot ${st === 'completed' ? 'done' : st === 'processing' ? 'running' : 'pending'}`;
+    lbl.style.color = st === 'completed' ? '#5D9B3D' : st === 'processing' ? '#FFD700' : '#444';
+  }
+}
+
+// ── New photo ─────────────────────────────────────────────────────────────────
+document.getElementById('btn-new').addEventListener('click', () => {
+  if (pollTimer) clearInterval(pollTimer);
+  blob = null; jobId = null;
+  resetDots();
+  show('screen-camera');
+});
+
+// ── Boot ──────────────────────────────────────────────────────────────────────
+startCamera();
+</script>
+</body>
+</html>
