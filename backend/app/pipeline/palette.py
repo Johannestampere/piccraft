@@ -1,5 +1,31 @@
 import numpy as np
 
+
+# Convert (N, 3) float32 RBG to (N, 3) LAB.
+def _rgb_to_lab(rgb: np.ndarray) -> np.ndarray:
+    c = np.clip(rgb, 0, 255) / 255.0       # normalize
+
+    # sRGB gamma -> linear light
+    linear = np.where(c > 0.04045, ((c + 0.055) / 1.055) ** 2.4, c / 12.92)
+
+    # Linear RGB -> XYZ
+    M = np.array([
+        [0.4124564, 0.3575761, 0.1804375],
+        [0.2126729, 0.7151522, 0.0721750],
+        [0.0193339, 0.1191920, 0.9503041],
+    ], dtype=np.float32)
+    xyz = linear @ M.T      # matrix multiply
+
+    # Normalize by D65 white point
+    xyz /= np.array([0.95047, 1.00000, 1.08883], dtype=np.float32)
+
+    # XYZ -> LAB
+    f = np.where(xyz > 0.008856, xyz ** (1.0 / 3.0), (903.3 * xyz + 16.0) / 116.0)
+    L = 116.0 * f[:, 1] - 16.0
+    a = 500.0 * (f[:, 0] - f[:, 1])
+    b = 200.0 * (f[:, 1] - f[:, 2])
+    return np.stack([L, a, b], axis=1)
+
 # (R, G, B, block_id)
 BLOCK_PALETTE: list[tuple[int, int, int, str]] = [
     # --- Concrete (vivid, saturated) ---
@@ -114,8 +140,6 @@ BLOCK_PALETTE: list[tuple[int, int, int, str]] = [
     (255, 153, 51,  "minecraft:orange_concrete_powder"),
     (255, 210, 100, "minecraft:yellow_concrete_powder"),
     (240, 120, 160, "minecraft:pink_concrete_powder"),
-    (200, 60,  60,  "minecraft:nether_brick"),
-    (100, 20,  20,  "minecraft:red_nether_brick"),
 
     # --- Blues / purples / cyans ---
     (100, 180, 220, "minecraft:light_blue_concrete_powder"),
@@ -145,11 +169,10 @@ BLOCK_PALETTE: list[tuple[int, int, int, str]] = [
     (60,  160, 80,  "minecraft:emerald_block"),
 ]
 
-# Pre-compute numpy array of all 48 palette colors.
-_PALETTE_RGB = np.array(
-    [(r, g, b) for r, g, b, _ in BLOCK_PALETTE], dtype=np.float32
-)
+# Pre-compute palette in both RGB and LAB.
+_PALETTE_RGB   = np.array([(r, g, b) for r, g, b, _ in BLOCK_PALETTE], dtype=np.float32)
 _PALETTE_NAMES = [name for _, _, _, name in BLOCK_PALETTE]
+_PALETTE_LAB   = _rgb_to_lab(_PALETTE_RGB)
 
 
 # Pick the best subset of palette blocks for this specific image.
@@ -157,8 +180,9 @@ _PALETTE_NAMES = [name for _, _, _, name in BLOCK_PALETTE]
 #   then keeps the top **max-colors** most-used blocks.
 def select_palette(pixels: np.ndarray, max_colors: int = 24) -> tuple[np.ndarray, list[str]]:
 
-    # Full-palette match for every pixel
-    diff = pixels[:, np.newaxis, :].astype(np.float32) - _PALETTE_RGB[np.newaxis, :, :]
+    # Full-palette match in LAB space
+    pixels_lab = _rgb_to_lab(pixels.astype(np.float32))
+    diff = pixels_lab[:, np.newaxis, :] - _PALETTE_LAB[np.newaxis, :, :]
     distances = np.sum(diff ** 2, axis=2)
     nearest = np.argmin(distances, axis=1)
 
@@ -178,10 +202,13 @@ def select_palette(pixels: np.ndarray, max_colors: int = 24) -> tuple[np.ndarray
 def map_image_to_blocks(pixels: np.ndarray, palette_rgb: np.ndarray | None = None, palette_names: list[str] | None = None) -> list[str]:
 
     if palette_rgb is None:
-        palette_rgb = _PALETTE_RGB
+        palette_lab = _PALETTE_LAB
         palette_names = _PALETTE_NAMES
+    else:
+        palette_lab = _rgb_to_lab(palette_rgb.astype(np.float32))
 
-    diff = pixels[:, np.newaxis, :].astype(np.float32) - palette_rgb[np.newaxis, :, :]
+    pixels_lab = _rgb_to_lab(pixels.astype(np.float32))
+    diff = pixels_lab[:, np.newaxis, :] - palette_lab[np.newaxis, :, :]
     distances = np.sum(diff ** 2, axis=2)
     indices = np.argmin(distances, axis=1)
     return [palette_names[i] for i in indices]
@@ -194,7 +221,8 @@ def nearest_block_from_palette(
     palette_names: list[str],
 ) -> tuple[str, np.ndarray]:
 
-    color = np.asarray(color, dtype=np.float32)
-    distances = np.sum((palette_rgb - color) ** 2, axis=1)
+    color_lab = _rgb_to_lab(np.asarray(color, dtype=np.float32).reshape(1, 3))
+    palette_lab = _rgb_to_lab(palette_rgb.astype(np.float32))
+    distances = np.sum((palette_lab - color_lab) ** 2, axis=1)
     idx = int(np.argmin(distances))
     return palette_names[idx], palette_rgb[idx]

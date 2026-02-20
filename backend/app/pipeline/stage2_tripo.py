@@ -23,17 +23,17 @@ from app.models import (
     BuildPlanMetadata,
     StageName,
 )
-from app.pipeline.palette import _PALETTE_RGB, _PALETTE_NAMES
+from app.pipeline.palette import _PALETTE_LAB, _PALETTE_NAMES, _rgb_to_lab
 
 logger = logging.getLogger(__name__)
 
-_PAL_RGB = np.array(_PALETTE_RGB, dtype=np.float32)
 _TRIPO_BASE = "https://api.tripo3d.ai/v2/openapi"
 
 
-# Palette lookups
+# Map (N, 3) float32 RGB 0-255 -> block names using perceptual LAB distance
 def _nearest_blocks(rgb: np.ndarray) -> list[str]:
-    diff = rgb[:, None, :] - _PAL_RGB[None, :, :]
+    rgb_lab = _rgb_to_lab(rgb)
+    diff = rgb_lab[:, None, :] - _PALETTE_LAB[None, :, :]
     dist = np.sum(diff ** 2, axis=2)
     indices = np.argmin(dist, axis=1)
     return [_PALETTE_NAMES[i] for i in indices]
