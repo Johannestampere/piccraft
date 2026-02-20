@@ -73,12 +73,15 @@
 <div id="screen-camera" class="screen active">
   <video id="video" autoplay playsinline muted></video>
   <canvas id="canvas"></canvas>
-  <div class="camera-ui">
+  <div class="camera-ui" style="justify-content:space-between;padding:24px 48px 40px">
+    <button class="mc-btn mc-dirt" id="btn-upload" style="align-self:center">UPLOAD</button>
     <div class="capture-btn" id="btn-capture">
       <div class="capture-btn-inner"></div>
     </div>
+    <div style="width:80px"></div>
   </div>
 </div>
+<input type="file" id="file-input" accept="image/*" style="display:none" />
 
 <!-- Preview -->
 <div id="screen-preview" class="screen">
@@ -146,6 +149,19 @@ document.getElementById('btn-capture').addEventListener('click', () => {
     document.getElementById('preview-img').src = URL.createObjectURL(b);
     show('screen-preview');
   }, 'image/jpeg', 0.88);
+});
+
+document.getElementById('btn-upload').addEventListener('click', () => {
+  document.getElementById('file-input').click();
+});
+
+document.getElementById('file-input').addEventListener('change', e => {
+  const file = e.target.files[0];
+  if (!file) return;
+  blob = file;
+  document.getElementById('preview-img').src = URL.createObjectURL(file);
+  e.target.value = '';
+  show('screen-preview');
 });
 
 document.getElementById('btn-retake').addEventListener('click', () => {
