@@ -55,6 +55,94 @@ BLOCK_PALETTE: list[tuple[int, int, int, str]] = [
     (76, 83, 42, "minecraft:green_terracotta"),
     (143, 61, 47, "minecraft:red_terracotta"),
     (37, 23, 16, "minecraft:black_terracotta"),
+
+    # --- Glazed Terracotta (vivid, patterned — unique saturated hues) ---
+    (237, 237, 237, "minecraft:white_glazed_terracotta"),
+    (228, 129, 57, "minecraft:orange_glazed_terracotta"),
+    (202, 75, 186, "minecraft:magenta_glazed_terracotta"),
+    (76, 175, 213, "minecraft:light_blue_glazed_terracotta"),
+    (235, 229, 57, "minecraft:yellow_glazed_terracotta"),
+    (141, 206, 85, "minecraft:lime_glazed_terracotta"),
+    (237, 155, 183, "minecraft:pink_glazed_terracotta"),
+    (85, 91, 91, "minecraft:gray_glazed_terracotta"),
+    (154, 161, 161, "minecraft:light_gray_glazed_terracotta"),
+    (57, 196, 197, "minecraft:cyan_glazed_terracotta"),
+    (102, 56, 157, "minecraft:purple_glazed_terracotta"),
+    (50, 69, 166, "minecraft:blue_glazed_terracotta"),
+    (154, 109, 77, "minecraft:brown_glazed_terracotta"),
+    (103, 145, 61, "minecraft:green_glazed_terracotta"),
+    (188, 74, 74, "minecraft:red_glazed_terracotta"),
+    (22, 22, 32, "minecraft:black_glazed_terracotta"),
+
+    # --- Skin tones (using smooth stone, sandstone, and wood variants) ---
+    (255, 220, 185, "minecraft:birch_planks"),       # very light peach
+    (242, 196, 154, "minecraft:oak_planks"),          # light skin / peach
+    (210, 158, 109, "minecraft:jungle_planks"),       # medium tan
+    (181, 124, 75,  "minecraft:acacia_planks"),       # medium-dark tan
+    (143, 89, 49,   "minecraft:spruce_planks"),       # warm brown skin
+    (101, 57, 28,   "minecraft:dark_oak_planks"),     # deep brown skin
+    (76,  40, 18,   "minecraft:mangrove_planks"),     # very dark brown
+    (236, 188, 168, "minecraft:cherry_planks"),       # pinkish light skin
+
+    # --- Stone / grey spectrum ---
+    (200, 200, 200, "minecraft:diorite"),
+    (170, 170, 170, "minecraft:andesite"),
+    (150, 122, 108, "minecraft:granite"),
+    (128, 128, 128, "minecraft:stone"),
+    (100, 100, 100, "minecraft:cobblestone"),
+    (72,  72,  72,  "minecraft:deepslate"),
+    (50,  50,  50,  "minecraft:polished_deepslate"),
+
+    # --- Earth / natural ---
+    (245, 220, 130, "minecraft:sand"),
+    (200, 175, 100, "minecraft:sandstone"),
+    (160, 140, 80,  "minecraft:smooth_sandstone"),
+    (134, 96,  67,  "minecraft:dirt"),
+    (110, 81,  51,  "minecraft:coarse_dirt"),
+    (90,  60,  30,  "minecraft:podzol"),
+    (61,  43,  31,  "minecraft:mud"),
+
+    # --- Greens (foliage spectrum) ---
+    (106, 144, 50,  "minecraft:oak_leaves"),
+    (80,  120, 30,  "minecraft:spruce_leaves"),
+    (60,  100, 20,  "minecraft:dark_oak_leaves"),
+    (45,  80,  15,  "minecraft:jungle_leaves"),
+    (120, 180, 60,  "minecraft:lime_concrete_powder"),
+
+    # --- Warm reds / oranges / pinks ---
+    (255, 100, 80,  "minecraft:red_concrete_powder"),
+    (255, 153, 51,  "minecraft:orange_concrete_powder"),
+    (255, 210, 100, "minecraft:yellow_concrete_powder"),
+    (240, 120, 160, "minecraft:pink_concrete_powder"),
+    (200, 60,  60,  "minecraft:nether_brick"),
+    (100, 20,  20,  "minecraft:red_nether_brick"),
+
+    # --- Blues / purples / cyans ---
+    (100, 180, 220, "minecraft:light_blue_concrete_powder"),
+    (50,  100, 200, "minecraft:blue_concrete_powder"),
+    (30,  60,  150, "minecraft:blue_ice"),
+    (180, 100, 220, "minecraft:purple_concrete_powder"),
+    (140, 60,  200, "minecraft:magenta_concrete_powder"),
+    (0,   200, 200, "minecraft:cyan_concrete_powder"),
+    (150, 230, 240, "minecraft:packed_ice"),
+
+    # --- Blacks / very darks ---
+    (20,  15,  25,  "minecraft:obsidian"),
+    (30,  25,  35,  "minecraft:crying_obsidian"),
+    (15,  15,  15,  "minecraft:coal_block"),
+
+    # --- Whites / near-whites ---
+    (250, 250, 250, "minecraft:snow_block"),
+    (220, 240, 255, "minecraft:white_concrete_powder"),
+    (245, 245, 220, "minecraft:quartz_block"),
+    (235, 225, 200, "minecraft:bone_block"),
+
+    # --- Metallic / special ---
+    (220, 180, 50,  "minecraft:gold_block"),
+    (180, 180, 185, "minecraft:iron_block"),
+    (100, 200, 190, "minecraft:diamond_block"),
+    (100, 60,  160, "minecraft:amethyst_block"),
+    (60,  160, 80,  "minecraft:emerald_block"),
 ]
 
 # Pre-compute numpy array of all 48 palette colors.
