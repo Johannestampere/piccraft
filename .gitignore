@@ -23,6 +23,18 @@ mobile/node_modules/
 mobile/.expo/
 mobile/dist/
 
+# Paper server
+paper-server/world/
+paper-server/world_nether/
+paper-server/world_the_end/
+paper-server/logs/
+paper-server/cache/
+paper-server/libraries/
+paper-server/versions/
+paper-server/usercache.json
+paper-server/*.lck
+paper-server/server.properties.bak
+
 # IDE
 .idea/
 *.iml
