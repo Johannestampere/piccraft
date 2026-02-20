@@ -327,6 +327,12 @@ def generate_tripo(cutout_path: str, job_id: str, voxel_size: int = 64) -> Build
         blocks.append(BuildPlanBlock(x=int(x), y=int(y), z=int(z), block=block))
         palette_set.add(block)
 
+    # Shift build down so the lowest block sits at y=0
+    if blocks:
+        min_y = min(b.y for b in blocks)
+        if min_y > 0:
+            blocks = [BuildPlanBlock(x=b.x, y=b.y - min_y, z=b.z, block=b.block) for b in blocks]
+
     elapsed_ms = int((time.perf_counter() - start) * 1000)
     logger.info(f"[{job_id}] Stage 2 Tripo: {len(blocks)} blocks in {elapsed_ms}ms")
 

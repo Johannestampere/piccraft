@@ -169,9 +169,16 @@ def generate_360(
                 blocks.append(BuildPlanBlock(x=col, y=y, z=z, block=bname))
                 palette_set.add(bname)
 
+    # Shift build down so the lowest block sits at y=0
+    if blocks:
+        min_y = min(b.y for b in blocks)
+
+        if min_y > 0:
+            blocks = [BuildPlanBlock(x=b.x, y=b.y - min_y, z=b.z, block=b.block) for b in blocks]
+
     elapsed_ms = int((time.perf_counter() - start) * 1000)
     logger.info(
-        f"Stage 2: {len(blocks)} blocks, {len(palette_set)} colors, {elapsed_ms}ms"
+        f"Stage 1: {len(blocks)} blocks, {len(palette_set)} colors, {elapsed_ms}ms"
     )
 
     return BuildPlan(
