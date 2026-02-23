@@ -29,6 +29,9 @@ public class BuildExecutor {
     // Most recently placed job id
     private volatile String lastJobId = null;
 
+    // Last plan per job (needed for re-placing on move)
+    private final Map<String, BuildPlan.Plan> storedPlans = new ConcurrentHashMap<>();
+
     public BuildExecutor(Plugin plugin, Logger logger, int blocksPerTick) {
         this.plugin = plugin;
         this.logger = logger;
@@ -66,6 +69,7 @@ public class BuildExecutor {
 
             info = new OriginInfo(origin, facing);
             origins.put(jobId, info);
+            storedPlans.put(jobId, plan);
 
             logger.info("[" + jobId + "] Origin: " + origin.getBlockX()
                     + ", " + origin.getBlockY() + ", " + origin.getBlockZ()
@@ -129,6 +133,27 @@ public class BuildExecutor {
         if (lastJobId == null) return null;
         String id = lastJobId;
         clearJob(id);
+        return id;
+    }
+
+    /**
+     * Move a build to the player's current position and facing. Returns false if job not found.
+     */
+    public boolean moveJob(String jobId, Player player, int forwardOffset) {
+        BuildPlan.Plan plan = storedPlans.get(jobId);
+        if (plan == null) return false;
+        origins.remove(jobId); // force fresh origin from player's current position
+        executeBuild(plan, player, forwardOffset);
+        return true;
+    }
+
+    /**
+     * Move the most recently placed build. Returns the job id moved, or null if none.
+     */
+    public String moveLast(Player player, int forwardOffset) {
+        if (lastJobId == null) return null;
+        String id = lastJobId;
+        moveJob(id, player, forwardOffset);
         return id;
     }
 

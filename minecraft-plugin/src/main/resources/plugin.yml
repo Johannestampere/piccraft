@@ -10,3 +10,6 @@ commands:
   picclear:
     description: "Clear a PicCraft build"
     usage: "/picclear [job_id|last]"
+  piccmove:
+    description: "Move a PicCraft build to your current position, facing the same dir as u"
+    usage: "/piccmove [job_id|last]"

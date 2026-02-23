@@ -29,6 +29,10 @@ public class PicCraftPlugin extends JavaPlugin {
         getCommand("picclear").setExecutor(clearCmd);
         getCommand("picclear").setTabCompleter(clearCmd);
 
+        MoveCommand moveCmd = new MoveCommand(executor, forwardOffset);
+        getCommand("piccmove").setExecutor(moveCmd);
+        getCommand("piccmove").setTabCompleter(moveCmd);
+
         getLogger().info("PicCraft enabled. Polling for builds...");
     }
 
