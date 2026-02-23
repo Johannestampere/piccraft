@@ -4,7 +4,7 @@ What if Minecraft could see your world?
 
 Take a photo on your phone and watch it build itself in-game — first as 2D pixel art, then as a 3D relief, and finally as a full AI-generated model.
 
----
+https://github.com/user-attachments/assets/64369316-7fd9-4901-b302-331f02b560e7
 
 ## How it works
 
@@ -16,8 +16,6 @@ Take a photo on your phone and watch it build itself in-game — first as 2D pix
    - **Stage 2 — Tripo 3D** (~90s): full AI-generated 3D mesh via Tripo API, voxelized into blocks
 4. The Paper plugin polls the backend and places each stage tick-safely as it completes
 
----
-
 ## Stack
 
 | Layer | Tech |
@@ -26,8 +24,6 @@ Take a photo on your phone and watch it build itself in-game — first as 2D pix
 | Backend | Python + FastAPI + Celery + Redis + Docker |
 | AI pipeline | Depth Anything V2, Tripo AI, segment-anything |
 | Minecraft | Paper 1.21.4 plugin (Java) |
-
----
 
 ## Project structure
 
@@ -38,8 +34,6 @@ paper-server/     Paper server config and plugins
 web/              Web camera app (static HTML)
 docker-compose.yml
 ```
-
----
 
 ## Running locally
 
@@ -81,8 +75,6 @@ Update the `BACKEND` constant in `web/index.html` to point at your backend (use 
 const BACKEND = 'https://your-ngrok-url.ngrok-free.app';
 ```
 
----
-
 ## Building the plugin
 
 ```bash
@@ -92,16 +84,12 @@ cp build/libs/PicCraft-0.1.0.jar ../paper-server/plugins/
 # Restart the Paper server
 ```
 
----
-
 ## Plugin commands
 
 | Command | Description |
 |---|---|
 | `/picclear [last\|job_id]` | Clear a placed build |
 | `/piccmove [last\|job_id]` | Move a build to your current position |
-
----
 
 ## Test upload
 
