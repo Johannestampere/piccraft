@@ -24,6 +24,11 @@ public class PicCraftPlugin extends JavaPlugin {
         poller = new JobPoller(this, client, executor, getLogger(), pollInterval, forwardOffset);
 
         poller.start();
+
+        ClearCommand clearCmd = new ClearCommand(executor);
+        getCommand("picclear").setExecutor(clearCmd);
+        getCommand("picclear").setTabCompleter(clearCmd);
+
         getLogger().info("PicCraft enabled. Polling for builds...");
     }
 

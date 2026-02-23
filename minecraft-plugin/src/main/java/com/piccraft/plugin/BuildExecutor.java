@@ -26,6 +26,9 @@ public class BuildExecutor {
     // Placement origin per job (locked on first stage, reused for replacements)
     private final Map<String, OriginInfo> origins = new ConcurrentHashMap<>();
 
+    // Most recently placed job id
+    private volatile String lastJobId = null;
+
     public BuildExecutor(Plugin plugin, Logger logger, int blocksPerTick) {
         this.plugin = plugin;
         this.logger = logger;
@@ -91,6 +94,7 @@ public class BuildExecutor {
         // Run batched clear + place
         new BatchedTask(toClear, toPlace, newRegion, () -> {
             activeRegions.put(jobId, newRegion);
+            lastJobId = jobId;
             long elapsed = System.currentTimeMillis() - startTime;
 
             logger.info("[" + jobId + "] Stage " + plan.stage + " placed: " + newRegion.size() + " blocks in " + elapsed + "ms");
@@ -99,6 +103,37 @@ public class BuildExecutor {
                 player.sendMessage("[PicCraft] " + plan.stage + " placed! (" + newRegion.size() + " blocks, " + elapsed + "ms)");
             }
         }).start();
+    }
+
+    /**
+     * Clear the blocks placed for a specific job. Returns false if job not found.
+     */
+    public boolean clearJob(String jobId) {
+        BuildRegion region = activeRegions.remove(jobId);
+        origins.remove(jobId);
+        if (region == null) return false;
+
+        List<Location> toClear = new ArrayList<>(region.getPlacedBlocks());
+        
+        new BatchedTask(toClear, Collections.emptyList(), new BuildRegion(jobId, "cleared", region.getWorld()), () -> {
+            if (jobId.equals(lastJobId)) lastJobId = null;
+        }).start();
+
+        return true;
+    }
+
+    /**
+     * Clear the most recently placed build. Returns the job id cleared, or null if none.
+     */
+    public String clearLast() {
+        if (lastJobId == null) return null;
+        String id = lastJobId;
+        clearJob(id);
+        return id;
+    }
+
+    public java.util.Set<String> getActiveJobIds() {
+        return activeRegions.keySet();
     }
 
     /**
