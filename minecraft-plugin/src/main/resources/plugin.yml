@@ -8,5 +8,5 @@ authors:
 
 commands:
   picclear:
-    description: Clear a PicCraft build. Usage: /picclear [job_id|last]
-    usage: /picclear [job_id|last]
+    description: "Clear a PicCraft build"
+    usage: "/picclear [job_id|last]"
