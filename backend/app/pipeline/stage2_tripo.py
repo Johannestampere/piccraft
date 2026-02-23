@@ -298,10 +298,10 @@ def _voxelize_mesh(glb_path: str, voxel_size: int) -> tuple[np.ndarray, np.ndarr
     all_coords = np.array(list(merged.keys()), dtype=int)
     all_colors = np.array(list(merged.values()), dtype=np.float32)
 
-    # Rotate 90deg clockwise around Y axis: (x, y, z) → (z, y, voxel_size-1-x)
+    # Rotate 270deg clockwise (90deg CCW) around Y axis: (x, y, z) → (voxel_size-1-z, y, x)
     rotated = all_coords.copy()
-    rotated[:, 0] = all_coords[:, 2]
-    rotated[:, 2] = (voxel_size - 1) - all_coords[:, 0]
+    rotated[:, 0] = (voxel_size - 1) - all_coords[:, 2]
+    rotated[:, 2] = all_coords[:, 0]
 
     return rotated, all_colors
 
