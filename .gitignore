@@ -34,6 +34,17 @@ paper-server/versions/
 paper-server/usercache.json
 paper-server/*.lck
 paper-server/server.properties.bak
+paper-server/.console_history
+paper-server/paper.jar
+paper-server/version_history.json
+paper-server/plugins/.paper-remapped/
+paper-server/plugins/bStats/
+paper-server/plugins/spark/
+paper-server/plugins/PicCraft-*.jar
+
+# Plugin compiled output
+minecraft-plugin/bin/
+
 
 # IDE
 .idea/
