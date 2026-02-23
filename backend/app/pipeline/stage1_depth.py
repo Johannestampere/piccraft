@@ -44,6 +44,8 @@ def generate_360(
     depth_map: np.ndarray,
     job_id: str,
     voxel_size: int = 64,
+    palette_rgb: np.ndarray | None = None,
+    palette_names: list[str] | None = None,
 ) -> BuildPlan:
 
 
@@ -91,10 +93,15 @@ def generate_360(
         for c in range(3)
     ], axis=2)
 
-    # Map opaque pixels to block names
+    # Map opaque pixels to block names using the provided palette (or full palette as fallback)
+    pal_rgb = palette_rgb if palette_rgb is not None else _PAL_RGB
+    pal_names = palette_names if palette_names is not None else _PALETTE_NAMES
+
     opaque_rgb = rgb_smooth[opaque_mask]          # (M, 3)
-    block_indices = _nearest_block(opaque_rgb)    # (M,)
-    block_names_flat = [_PALETTE_NAMES[i] for i in block_indices]
+
+    diff = opaque_rgb[:, None, :] - pal_rgb[None, :, :]
+    block_indices = np.argmin(np.sum(diff ** 2, axis=2), axis=1)
+    block_names_flat = [pal_names[i] for i in block_indices]
 
     # Build 3D occupancy grid with symmetric extrusion
     max_half_depth = voxel_size // 4   # 16 for voxel_size=64

@@ -123,7 +123,7 @@ def run_pipeline(job_id: str) -> None:
     try:
         t0 = time.perf_counter()
 
-        plan = generate_preview(
+        plan, stage0_palette_rgb, stage0_palette_names = generate_preview(
             cutout_path=cutout_path,
             job_id=job_id,
             grid_size=settings.stage0_grid_size,
@@ -150,6 +150,8 @@ def run_pipeline(job_id: str) -> None:
             depth_map=depth_map,
             job_id=job_id,
             voxel_size=settings.stage1_voxel_size,
+            palette_rgb=stage0_palette_rgb,
+            palette_names=stage0_palette_names,
         )
         save_build_plan(job_id, stage=1, plan=plan)
 

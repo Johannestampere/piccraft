@@ -64,7 +64,7 @@ def _floyd_steinberg_dither(rgb: np.ndarray, alpha: np.ndarray, palette_rgb: np.
 
 
 # Generate 2D preview
-def generate_preview(cutout_path: str, job_id: str, grid_size: int = 64) -> BuildPlan:
+def generate_preview(cutout_path: str, job_id: str, grid_size: int = 64) -> tuple[BuildPlan, np.ndarray, list[str]]:
     start = time.perf_counter()
 
     img = Image.open(cutout_path).convert("RGBA")
@@ -81,13 +81,14 @@ def generate_preview(cutout_path: str, job_id: str, grid_size: int = 64) -> Buil
     if len(opaque_rgb) == 0:
         logger.warning("No opaque pixels in cutout")
 
+        from app.pipeline.palette import _PALETTE_RGB, _PALETTE_NAMES
         return BuildPlan(
             job_id=job_id,
             stage=StageName.preview,
             dimensions=BuildPlanDimensions(width=grid_size, height=grid_size, depth=1),
             blocks=[],
             metadata=BuildPlanMetadata(total_blocks=0, processing_time_ms=0),
-        )
+        ), np.array(_PALETTE_RGB, dtype=np.float32), list(_PALETTE_NAMES)
 
     palette_rgb, palette_names = select_palette(opaque_rgb, max_colors=24)
 
@@ -118,7 +119,7 @@ def generate_preview(cutout_path: str, job_id: str, grid_size: int = 64) -> Buil
     elapsed_ms = int((time.perf_counter() - start) * 1000)
     logger.info(f"Stage 0 preview: {len(blocks)} blocks, {len(palette_set)} colors, {elapsed_ms}ms")
 
-    return BuildPlan(
+    plan = BuildPlan(
         job_id=job_id,
         stage=StageName.preview,
         dimensions=BuildPlanDimensions(
@@ -133,3 +134,4 @@ def generate_preview(cutout_path: str, job_id: str, grid_size: int = 64) -> Buil
             processing_time_ms=elapsed_ms,
         ),
     )
+    return plan, palette_rgb, palette_names
